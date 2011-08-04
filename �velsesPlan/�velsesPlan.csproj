@@ -1,0 +1,816 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{141370E0-E8BA-4500-B80C-65E28E8A04BA}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ØvelsesPlan</RootNamespace>
+    <AssemblyName>ØvelsesPlan</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Pex.Framework, Version=0.94.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Nancy">
+      <HintPath>..\packages\Nancy.0.6.0\lib\4.0\Nancy.dll</HintPath>
+    </Reference>
+    <Reference Include="Nancy.Hosting.Aspnet">
+      <HintPath>..\packages\Nancy.Hosting.Aspnet.0.6.0\lib\4.0\Nancy.Hosting.Aspnet.dll</HintPath>
+    </Reference>
+    <Reference Include="Nancy.ViewEngines.Razor">
+      <HintPath>..\packages\Nancy.Viewengines.Razor.0.6.0\lib\4.0\Nancy.ViewEngines.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Nancy.Viewengines.Razor.0.6.0\lib\4.0\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\DataTables-1.8.1\.gitignore" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\advanced_init\column_render.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\advanced_init\complex_header.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\advanced_init\dom_multiple_elements.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\advanced_init\dom_toolbar.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\advanced_init\events_live.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\advanced_init\events_post_init.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\advanced_init\events_pre_init.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\advanced_init\footer_callback.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\advanced_init\highlight.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\advanced_init\html_sort.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\advanced_init\language_file.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\advanced_init\length_menu.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\advanced_init\row_callback.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\advanced_init\row_grouping.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\advanced_init\sorting_control.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\ajax\ajax.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\ajax\custom_data_property.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\ajax\deep.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\ajax\defer_render.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\ajax\null_data_source.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\ajax\objects.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\ajax\objects_subarrays.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\ajax\sources\arrays.txt" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\ajax\sources\arrays_subobjects.txt" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\ajax\sources\array_only.txt" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\ajax\sources\custom_prop.txt" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\ajax\sources\deep.txt" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\ajax\sources\objects.txt" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\ajax\sources\objects_subarrays.txt" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\api\add_row.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\api\api_in_init.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\api\counter_column.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\api\editable.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\api\form.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\api\highlight.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\api\multi_filter.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\api\multi_filter_select.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\api\regex.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\api\row_details.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\api\select_row.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\api\select_single_row.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\api\show_hide.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\api\tabs_and_scrolling.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\basic_init\alt_pagination.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\basic_init\complex_header.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\basic_init\dom.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\basic_init\filter_only.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\basic_init\hidden_columns.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\basic_init\language.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\basic_init\multiple_tables.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\basic_init\multi_col_sort.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\basic_init\scroll_x.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\basic_init\scroll_xy.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\basic_init\scroll_y.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\basic_init\scroll_y_infinite.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\basic_init\scroll_y_theme.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\basic_init\state_save.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\basic_init\table_sorting.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\basic_init\themes.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\basic_init\zero_config.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\data_sources\ajax.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\data_sources\dom.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\data_sources\js_array.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\data_sources\server_side.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\data.sql" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\details_close.png" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\details_open.png" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\de_DE.txt" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\editable_ajax.php" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\index.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\infiniteScroll.php" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\jquery-ui-tabs.js" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\jquery.jeditable.js" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\jquery.tooltip.css" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\jquery.tooltip.js" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\themes\smoothness\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\themes\smoothness\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\themes\smoothness\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\themes\smoothness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\themes\smoothness\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\themes\smoothness\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\themes\smoothness\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\themes\smoothness\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\themes\smoothness\images\ui-icons_222222_256x240.png" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\themes\smoothness\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\themes\smoothness\images\ui-icons_454545_256x240.png" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\themes\smoothness\images\ui-icons_888888_256x240.png" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\themes\smoothness\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\themes\smoothness\jquery-ui-1.8.4.custom.css" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\themes\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\themes\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\themes\ui-lightness\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\themes\ui-lightness\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\themes\ui-lightness\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\themes\ui-lightness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\themes\ui-lightness\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\themes\ui-lightness\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\themes\ui-lightness\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\themes\ui-lightness\images\ui-icons_222222_256x240.png" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\themes\ui-lightness\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\themes\ui-lightness\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\themes\ui-lightness\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\themes\ui-lightness\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\examples_support\themes\ui-lightness\jquery-ui-1.8.4.custom.css" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\index.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\plug-ins\dom_sort.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\plug-ins\html_sort.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\plug-ins\paging_plugin.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\plug-ins\plugin_api.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\plug-ins\range_filtering.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\plug-ins\sorting_plugin.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\plug-ins\sorting_sType.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\server_side\column_ordering.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\server_side\custom_vars.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\server_side\defer_loading.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\server_side\editable.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\server_side\ids.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\server_side\jsonp.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\server_side\object_data.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\server_side\pipeline.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\server_side\post.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\server_side\row_details.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\server_side\scripts\custom_data_property.php" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\server_side\scripts\details_col.php" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\server_side\scripts\filter_col.php" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\server_side\scripts\id.php" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\server_side\scripts\jsonp.php" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\server_side\scripts\objects.php" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\server_side\scripts\ordering.php" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\server_side\scripts\post.php" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\server_side\scripts\server_processing.php" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\server_side\select_rows.html" />
+    <Content Include="Scripts\DataTables-1.8.1\examples\server_side\server_side.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\AutoFill\callbacks.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\AutoFill\columns.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\AutoFill\index.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\AutoFill\inputs.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\AutoFill\media\css\AutoFill.css" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\AutoFill\media\docs\css\default.css" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\AutoFill\media\docs\files.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\AutoFill\media\docs\index.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\AutoFill\media\docs\symbols\AutoFill#dom.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\AutoFill\media\docs\symbols\AutoFill#s.border.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\AutoFill\media\docs\symbols\AutoFill#s.columns.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\AutoFill\media\docs\symbols\AutoFill#s.drag.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\AutoFill\media\docs\symbols\AutoFill#s.filler.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\AutoFill\media\docs\symbols\AutoFill#s.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\AutoFill\media\docs\symbols\AutoFill#s.screen.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\AutoFill\media\docs\symbols\AutoFill#s.scroller.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\AutoFill\media\docs\symbols\AutoFill.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\AutoFill\media\docs\symbols\src\js_AutoFill.js.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\AutoFill\media\docs\symbols\_global_.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\AutoFill\media\images\filler.png" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\AutoFill\media\js\AutoFill.js" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\AutoFill\media\js\AutoFill.min.js" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\AutoFill\scrolling.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColReorder\alt_insert.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColReorder\colvis.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColReorder\col_filter.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColReorder\fixedcolumns.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColReorder\fixedheader.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColReorder\index.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColReorder\media\css\ColReorder.css" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColReorder\media\docs\css\default.css" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColReorder\media\docs\files.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColReorder\media\docs\index.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColReorder\media\docs\symbols\ColReorder#dom.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColReorder\media\docs\symbols\ColReorder#s.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColReorder\media\docs\symbols\ColReorder#s.mouse.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColReorder\media\docs\symbols\ColReorder.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColReorder\media\docs\symbols\src\js_ColReorder.js.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColReorder\media\docs\symbols\_global_.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColReorder\media\images\insert.png" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColReorder\media\js\ColReorder.js" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColReorder\media\js\ColReorder.min.js" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColReorder\predefined.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColReorder\reset.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColReorder\scrolling.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColReorder\server_side.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColReorder\state_save.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColReorder\theme.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColVis\exclude_columns.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColVis\index.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColVis\media\css\ColVis.css" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColVis\media\css\ColVisAlt.css" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColVis\media\docs\css\default.css" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColVis\media\docs\files.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColVis\media\docs\index.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColVis\media\docs\symbols\ColVis#dom.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColVis\media\docs\symbols\ColVis#s.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColVis\media\docs\symbols\ColVis.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColVis\media\docs\symbols\src\js_ColVis.js.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColVis\media\docs\symbols\_global_.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColVis\media\docs_private\css\default.css" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColVis\media\docs_private\files.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColVis\media\docs_private\index.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColVis\media\docs_private\symbols\ColVis#dom.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColVis\media\docs_private\symbols\ColVis#s.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColVis\media\docs_private\symbols\ColVis.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColVis\media\docs_private\symbols\src\js_ColVis.js.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColVis\media\docs_private\symbols\_global_.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColVis\media\images\button.png" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColVis\media\js\ColVis.js" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColVis\media\js\ColVis.min.js" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColVis\mouseover.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColVis\style.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColVis\text.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColVis\theme.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColVis\title_callback.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColVis\two_tables.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\ColVis\two_tables_identical.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\col_filter.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\css_size.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\docs\FixedColumns.defaults.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\docs\FixedColumns.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\docs\FixedColumns_dom.clone.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\docs\FixedColumns_dom.clone.left.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\docs\FixedColumns_dom.clone.right.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\docs\FixedColumns_dom.grid.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\docs\FixedColumns_dom.grid.left.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\docs\FixedColumns_dom.grid.right.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\docs\FixedColumns_dom.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\docs\FixedColumns_s.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\docs\index.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\docs\media\css\doc.css" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\docs\media\css\shCore.css" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\docs\media\css\shThemeDataTables.css" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\docs\media\images\arrow.jpg" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\docs\media\images\extended.png" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\docs\media\js\doc.js" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\docs\media\js\jquery.js" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\docs\media\js\shBrushJScript.js" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\docs\media\js\shCore.js" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\index.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\index_column.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\left_right_columns.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\media\js\FixedColumns.js" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\media\js\FixedColumns.min.js" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\right_column.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\rowspan.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\row_grouping.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\row_grouping_height.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\scale_fixed.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\scale_relative.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\server-side-processing.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\themed.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\two_columns.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedColumns\x_y_scrolling.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedHeader\html_table.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedHeader\index.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedHeader\js\FixedHeader.js" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedHeader\js\FixedHeader.min.js" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedHeader\top_bottom_left_right.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedHeader\top_left.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedHeader\two_tables.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\FixedHeader\zIndexes.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\KeyTable\datatable.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\KeyTable\datatable_scrolling.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\KeyTable\editing.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\KeyTable\form.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\KeyTable\index.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\KeyTable\js\KeyTable.js" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\KeyTable\js\KeyTable.min.js" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\Scroller\api_scrolling.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\Scroller\index.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\Scroller\large_js_source.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\Scroller\media\data\2500.txt" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\Scroller\media\data\server_processing.php" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\Scroller\media\docs\global.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\Scroller\media\docs\index.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\Scroller\media\docs\media\css\doc.css" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\Scroller\media\docs\media\css\shCore.css" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\Scroller\media\docs\media\css\shThemeDataTables.css" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\Scroller\media\docs\media\images\arrow.jpg" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\Scroller\media\docs\media\images\extended.png" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\Scroller\media\docs\media\js\doc.js" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\Scroller\media\docs\media\js\jquery.js" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\Scroller\media\docs\media\js\shBrushJScript.js" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\Scroller\media\docs\media\js\shCore.js" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\Scroller\media\docs\_anonymous__Scroller.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\Scroller\media\docs\_anonymous__Scroller.oDefaults.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\Scroller\media\docs\_anonymous__Scroller_dom.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\Scroller\media\docs\_anonymous__Scroller_s.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\Scroller\media\js\Scroller.js" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\Scroller\media\js\Scroller.min.js" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\Scroller\server-side_processing.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\Scroller\state_saving.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\alter_buttons.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\alt_init.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\button_text.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\collection.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\defaults.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\index.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\css\TableTools.css" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\css\TableTools_JUI.css" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\docs\css\default.css" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\docs\files.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\docs\index.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\docs\symbols\src\js_TableTools.js.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\docs\symbols\TableTools#dom.collection.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\docs\symbols\TableTools#dom.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\docs\symbols\TableTools#dom.print.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\docs\symbols\TableTools#s.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\docs\symbols\TableTools#s.print.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\docs\symbols\TableTools#s.select.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\docs\symbols\TableTools.BUTTONS.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\docs\symbols\TableTools.DEFAULTS.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\docs\symbols\TableTools.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\docs\symbols\_global_.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\images\background.png" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\images\collection.png" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\images\collection_hover.png" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\images\copy.png" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\images\copy_hover.png" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\images\csv.png" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\images\csv_hover.png" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\images\pdf.png" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\images\pdf_hover.png" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\images\print.png" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\images\print_hover.png" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\images\xls.png" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\images\xls_hover.png" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\js\TableTools.js" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\js\TableTools.min.js" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\js\ZeroClipboard.js" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\swf\copy_cvs_xls.swf" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\media\swf\copy_cvs_xls_pdf.swf" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\multiple_tables.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\multi_instance.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\pdf_message.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\plug-in.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\select_multi.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\select_single.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\swf_path.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\tabs.html" />
+    <Content Include="Scripts\DataTables-1.8.1\extras\TableTools\theme.html" />
+    <Content Include="Scripts\DataTables-1.8.1\license-bsd.txt" />
+    <Content Include="Scripts\DataTables-1.8.1\license-gpl2.txt" />
+    <Content Include="Scripts\DataTables-1.8.1\media\css\demo_page.css" />
+    <Content Include="Scripts\DataTables-1.8.1\media\css\demo_table.css" />
+    <Content Include="Scripts\DataTables-1.8.1\media\css\demo_table_jui.css" />
+    <Content Include="Scripts\DataTables-1.8.1\media\images\back_disabled.jpg" />
+    <Content Include="Scripts\DataTables-1.8.1\media\images\back_enabled.jpg" />
+    <Content Include="Scripts\DataTables-1.8.1\media\images\favicon.ico" />
+    <Content Include="Scripts\DataTables-1.8.1\media\images\forward_disabled.jpg" />
+    <Content Include="Scripts\DataTables-1.8.1\media\images\forward_enabled.jpg" />
+    <Content Include="Scripts\DataTables-1.8.1\media\images\sort_asc.png" />
+    <Content Include="Scripts\DataTables-1.8.1\media\images\sort_asc_disabled.png" />
+    <Content Include="Scripts\DataTables-1.8.1\media\images\sort_both.png" />
+    <Content Include="Scripts\DataTables-1.8.1\media\images\sort_desc.png" />
+    <Content Include="Scripts\DataTables-1.8.1\media\images\sort_desc_disabled.png" />
+    <Content Include="Scripts\DataTables-1.8.1\media\js\jquery.dataTables.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\js\jquery.dataTables.min.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\js\jquery.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\controller.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\controller.php" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\index.html" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\performance\draw.html" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\performance\large.php" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\performance\page.html" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\performance\sort.html" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\templates\-complex_header.php" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\templates\2512.php" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\templates\complex_header_2.php" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\templates\deferred_table.php" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\templates\dom_data.php" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\templates\dom_data_th.php" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\templates\dom_data_two_headers.php" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\templates\dymanic_table.php" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\templates\empty_table.php" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\templates\js_data.php" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\templates\js_data_mixed_types.php" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\templates\two_tables.php" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests\1_dom\_zero_config.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\-complex_header.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\-iDraw.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\2512.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\2530-2.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\2530.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\2569.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\2600.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\2608.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\2635.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\2746-stable-sort.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\2799.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\2840-restore-table-width.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\2914-state-save-sort.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\5396-fnUpdate-arrays.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\aaSorting.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\aaSortingFixed.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\aoColumns.bSearchable.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\aoColumns.bSortable.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\aoColumns.bUseRendered.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\aoColumns.bVisible.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\aoColumns.bVisible2.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\aoColumns.fnRender.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\aoColumns.iDataSort.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\aoColumns.sClass.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\aoColumns.sName.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\aoColumns.sTitle.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\aoColumns.sWidth.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\aoSearchCols.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\asStripClasses.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\bAutoWidth.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\bFilter.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\bInfiniteScroll.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\bInfo.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\bJQueryUI.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\bLengthChange.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\bPaginate.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\bProcessing.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\bServerSide.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\bSort.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\bSortCellsTop.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\bSortClasses.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\fnCookieCallback.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\fnDeleteRow.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\fnDrawCallback.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\fnFooterCallback.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\fnHeaderCallback.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\fnInfoCallback.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\fnInitComplete.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\fnRowCallback.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\fnSetColumnVis.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\fnSetColumnVis2.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\iDisplayLength.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\oLanguage.oPaginate.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\oLanguage.sInfo.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\oLanguage.sInfoEmpty.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\oLanguage.sInfoPostFix.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\oLanguage.sLengthMenu.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\oLanguage.sProcessing.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\oLanguage.sSearch.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\oLanguage.sUrl.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\oLanguage.sZeroRecords.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\oSearch.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\sAjaxSource.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\sDom.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\sPaginationType.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\th_in_body.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\1_dom\_zero_config.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\aaSorting.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\aaSortingFixed.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\aoColumns.bSearchable.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\aoColumns.bSortable.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\aoColumns.bUseRendered.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\aoColumns.bVisible.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\aoColumns.fnRender.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\aoColumns.iDataSort.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\aoColumns.sClass.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\aoColumns.sName.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\aoColumns.sTitle.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\aoColumns.sWidth.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\aoSearchCols.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\asStripClasses.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\bAutoWidth.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\bFilter.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\bInfo.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\bLengthChange.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\bPaginate.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\bProcessing.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\bServerSide.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\bSort.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\bSortClasses.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\fnDrawCallback.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\fnFooterCallback.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\fnHeaderCallback.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\fnInitComplete.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\fnRowCallback.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\iDisplayLength.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\js_data_mixed_types.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\oLanguage.oPaginate.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\oLanguage.sInfo.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\oLanguage.sInfoEmpty.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\oLanguage.sInfoPostFix.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\oLanguage.sLengthMenu.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\oLanguage.sProcessing.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\oLanguage.sSearch.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\oLanguage.sUrl.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\oLanguage.sZeroRecords.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\oSearch.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\sAjaxSource.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\sDom.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\sPaginationType.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\2_js\_zero_config.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\aaSorting.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\aaSortingFixed.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\aoColumns.bSearchable.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\aoColumns.bSortable.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\aoColumns.bUseRendered.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\aoColumns.bVisible.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\aoColumns.fnRender.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\aoColumns.iDataSort.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\aoColumns.sClass.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\aoColumns.sName.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\aoColumns.sTitle.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\aoColumns.sWidth.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\aoSearchCols.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\asStripClasses.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\bAutoWidth.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\bFilter.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\bInfo.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\bLengthChange.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\bPaginate.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\bProcessing.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\bServerSide.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\bSort.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\bSortClasses.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\fnDrawCallback.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\fnHeaderCallback.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\fnInitComplete.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\fnRowCallback.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\fnServerData.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\iDisplayLength.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\oLanguage.oPaginate.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\oLanguage.sInfo.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\oLanguage.sInfoEmpty.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\oLanguage.sInfoPostFix.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\oLanguage.sLengthMenu.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\oLanguage.sLoadingRecords.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\oLanguage.sProcessing.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\oLanguage.sSearch.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\oLanguage.sUrl.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\oLanguage.sZeroRecords.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\oSearch.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\sAjaxDataProp.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\sAjaxDataProp2.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\sAjaxSource.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\sDom.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\sPaginationType.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\3_ajax\_zero_config.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\-iDraw.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\2440.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\2569.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\2600.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\aaSorting.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\aaSortingFixed.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\aoColumns.bSearchable.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\aoColumns.bSortable.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\aoColumns.bUseRendered.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\aoColumns.bVisible.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\aoColumns.fnRender.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\aoColumns.sClass.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\aoColumns.sName.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\aoColumns.sTitle.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\aoColumns.sWidth.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\aoSearchCols.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\asStripClasses.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\bAutoWidth.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\bFilter.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\bInfiniteScroll.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\bInfo.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\bLengthChange.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\bPaginate.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\bProcessing.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\bServerSide.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\bSort.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\bSortClasses.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\fnDrawCallback.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\fnHeaderCallback.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\fnInitComplete.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\fnRowCallback.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\iDeferLoading.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\iDisplayLength.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\oLanguage.oPaginate.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\oLanguage.sInfo.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\oLanguage.sInfoEmpty.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\oLanguage.sInfoPostFix.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\oLanguage.sLengthMenu.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\oLanguage.sProcessing.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\oLanguage.sSearch.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\oLanguage.sUrl.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\oLanguage.sZeroRecords.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\oSearch.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\sAjaxDataProp.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\sAjaxSource.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\sDom.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\sPaginationType.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\4_server-side\_zero_config.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\aaSorting.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\aaSortingFixed.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\aoColumns.bSearchable.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\aoColumns.bSortable.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\aoColumns.bUseRendered.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\aoColumns.bVisible.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\aoColumns.fnRender.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\aoColumns.iDataSort.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\aoColumns.sClass.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\aoColumns.sName.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\aoColumns.sTitle.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\aoColumns.sWidth.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\aoSearchCols.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\asStripClasses.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\bAutoWidth.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\bFilter.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\bInfo.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\bLengthChange.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\bPaginate.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\bProcessing.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\bServerSide.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\bSort.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\bSortClasses.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\fnDrawCallback.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\fnHeaderCallback.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\fnInitComplete.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\fnRowCallback.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\fnServerData.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\iDisplayLength.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\oLanguage.oPaginate.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\oLanguage.sInfo.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\oLanguage.sInfoEmpty.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\oLanguage.sInfoPostFix.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\oLanguage.sLengthMenu.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\oLanguage.sProcessing.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\oLanguage.sSearch.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\oLanguage.sUrl.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\oLanguage.sZeroRecords.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\oSearch.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\sAjaxSource.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\sDom.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\sPaginationType.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\_zero_config_arrays_subobjects.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\_zero_config_deep.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\_zero_config_null_source.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\_zero_config_objects.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\5_ajax_objects\_zero_config_objects_subarrays.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\aaSorting.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\aaSortingFixed.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\aoColumns.bSearchable.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\aoColumns.bSortable.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\aoColumns.bUseRendered.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\aoColumns.bVisible.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\aoColumns.fnRender.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\aoColumns.iDataSort.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\aoColumns.sClass.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\aoColumns.sName.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\aoColumns.sTitle.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\aoColumns.sWidth.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\aoSearchCols.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\asStripClasses.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\bAutoWidth.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\bFilter.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\bInfo.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\bLengthChange.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\bPaginate.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\bProcessing.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\bServerSide.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\bSort.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\bSortClasses.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\fnDrawCallback.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\fnHeaderCallback.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\fnInitComplete.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\fnRowCallback.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\fnServerData.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\iDisplayLength.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\oLanguage.oPaginate.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\oLanguage.sInfo.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\oLanguage.sInfoEmpty.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\oLanguage.sInfoPostFix.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\oLanguage.sLengthMenu.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\oLanguage.sProcessing.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\oLanguage.sSearch.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\oLanguage.sUrl.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\oLanguage.sZeroRecords.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\oSearch.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\sAjaxDataProp.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\sAjaxDataProp2.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\sAjaxSource.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\sDom.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\sPaginationType.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\tests_onhold\6_delayed_rendering\_zero_config.js" />
+    <Content Include="Scripts\DataTables-1.8.1\media\unit_testing\unit_test.js" />
+    <Content Include="Scripts\DataTables-1.8.1\Readme.txt" />
+    <Content Include="Views\Index.htm" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ExercisePlannerModule.cs" />
+    <Compile Include="Model\Exercise.cs" />
+    <Compile Include="Model\ExerciseRepository.cs" />
+    <Compile Include="Model\WeekPlanEntry.cs" />
+    <Compile Include="Model\WeekPlanRepository.cs" />
+    <Compile Include="Model\DanishClaendar.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\DataTables-1.8.1\extras\AutoFill\media\js\AutoFill.min.js.gz" />
+    <None Include="Scripts\DataTables-1.8.1\extras\ColReorder\media\js\ColReorder.min.js.gz" />
+    <None Include="Scripts\DataTables-1.8.1\extras\ColVis\media\js\ColVis.min.js.gz" />
+    <None Include="Scripts\DataTables-1.8.1\extras\FixedColumns\docs\media\license\Syntax Highlighter" />
+    <None Include="Scripts\DataTables-1.8.1\extras\FixedColumns\media\js\FixedColumns.min.js.gz" />
+    <None Include="Scripts\DataTables-1.8.1\extras\FixedHeader\js\FixedHeader.min.js.gz" />
+    <None Include="Scripts\DataTables-1.8.1\extras\KeyTable\js\KeyTable.min.js.gz" />
+    <None Include="Scripts\DataTables-1.8.1\extras\Scroller\media\docs\media\license\Syntax Highlighter" />
+    <None Include="Scripts\DataTables-1.8.1\extras\Scroller\media\js\Scroller.min.js.gz" />
+    <None Include="Scripts\DataTables-1.8.1\extras\TableTools\media\as3\lib\AlivePDF.swc" />
+    <None Include="Scripts\DataTables-1.8.1\extras\TableTools\media\as3\ZeroClipboard.as" />
+    <None Include="Scripts\DataTables-1.8.1\extras\TableTools\media\as3\ZeroClipboardPdf.as" />
+    <None Include="Scripts\DataTables-1.8.1\extras\TableTools\media\images\psd\collection.psd" />
+    <None Include="Scripts\DataTables-1.8.1\extras\TableTools\media\images\psd\copy document.psd" />
+    <None Include="Scripts\DataTables-1.8.1\extras\TableTools\media\images\psd\file_types.psd" />
+    <None Include="Scripts\DataTables-1.8.1\extras\TableTools\media\images\psd\printer.psd" />
+    <None Include="Scripts\DataTables-1.8.1\extras\TableTools\media\js\TableTools.min.js.gz" />
+    <None Include="Scripts\DataTables-1.8.1\media\images\Sorting icons.psd" />
+    <None Include="Scripts\DataTables-1.8.1\media\js\jquery.dataTables.min.js.gz" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Exercises.htm" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>55965</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

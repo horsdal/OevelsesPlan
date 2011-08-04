@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Øvelsesplan</title>
+	<style type="text/css" title="currentStyle">
+		    @import "http://www.datatables.net//release-datatables/media/css/demo_page.css";
+			@import "http://www.datatables.net//release-datatables//media/css/demo_table.css";
+		</style>
+        <script type="text/javascript" language="javascript" src="http://www.datatables.net//release-datatables/media/js/jquery.js"></script>
+		<script type="text/javascript" language="javascript" src="http://www.datatables.net//release-datatables/media/js/jquery.dataTables.js"></script>
+        <script type="text/javascript" language="javascript" src="http://www.datatables.net//release-datatables/examples/examples_support/jquery.jeditable.js"></script> 
+
+		<script type="text/javascript" charset="utf-8">
+		    $(document).ready(function () {
+		        var oTable = $('#exercises').dataTable({
+		            "bProcessing": true,
+		            "sAjaxSource": "weekplan/current",
+                    "bSort": false })
+		        });
+		</script>
+</head>
+<body id="dt_example">
+	<div id="container">
+    <div class="full_width big">
+				Øvelsesplanlægger
+			</div>
+    <h1>Øvelser</h1>
+    <div id="dynamic">
+<table cellpadding="0" cellspacing="0" border="0" class="display" id="exercises">
+	<thead>
+		<tr>
+			<th width="50%">Ugedag</th>
+			<th width="50%">Øvelse</th>
+		</tr>
+	</thead>
+	<tbody>
+		
+	</tbody>
+</table>
+            <p><a href="" id="previous_week">&lt;&lt;</a>  <a href="" id="next_week">&gt;&gt;</a></p>
+            <p><a href="" id="new_plan_for_week">Lav ny plan for denne uge</a></p>
+            <p><a href="exercises/" id="create_exercise">Alle øvelse</a></p>
+            </div>
+            </div>
+</body>
+</html>
