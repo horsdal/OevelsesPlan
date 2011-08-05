@@ -20,7 +20,7 @@ namespace ØvelsesPlanTests
 
                         "be for the current week".asIn
                             (
-                                () => currentWeekPlan.WeekNumber.Should().Equal(DanishClaendar.Current)
+                                () => currentWeekPlan.WeekNumber.Should().Equal(DanishClaendar.CurrentWeek)
                             );
 
                         "contain an empty list of exercises for each weekday".asIn
@@ -39,19 +39,17 @@ namespace ØvelsesPlanTests
         public void when_database_has_only_active_exercises(int numberOfExercisesInDatabase)
         {
             PrimeDatabaseWtih3ActiveExercises(numberOfExercisesInDatabase);
+            var weekPlanRepository = new WeekPlanRepository();
+            var currentWeekPlan = weekPlanRepository.GetCurrentWeekPlan();
 
             "The current weekplan".should(
                 () =>
                     {
-                        var currentWeekPlan = new WeekPlanRepository().GetCurrentWeekPlan();
-
-                        "be for the current week".asIn
-                            (
-                                () => currentWeekPlan.WeekNumber.Should().Equal(DanishClaendar.Current)
+                        "be for the current week".asIn(
+                                () => currentWeekPlan.WeekNumber.Should().Equal(DanishClaendar.CurrentWeek)
                             );
 
-                        "contain all exercises".asIn
-                            (
+                        "contain all exercises".asIn(
                                 () =>
                                     {
                                         currentWeekPlan.Should().Count.Exactly(numberOfExercisesInDatabase);
@@ -60,19 +58,35 @@ namespace ØvelsesPlanTests
                                     }
                             );
 
-                        "have exercises evenly distributed. In this case one on each day".asIn
-                            (
+                        "have exercises evenly distributed on weekdays".asIn(
+                            () =>
+                            {
+                                var approxExercisesPerDay = numberOfExercisesInDatabase / 5;
+                                currentWeekPlan.Where(entry => entry.Day == DayOfWeek.Monday).Should().Count.AtLeast(approxExercisesPerDay);
+                                currentWeekPlan.Where(entry => entry.Day == DayOfWeek.Tuesday).Should().Count.AtLeast(approxExercisesPerDay);
+                                currentWeekPlan.Where(entry => entry.Day == DayOfWeek.Wednesday).Should().Count.AtLeast(approxExercisesPerDay);
+                                currentWeekPlan.Where(entry => entry.Day == DayOfWeek.Thursday).Should().Count.AtLeast(approxExercisesPerDay);
+                                currentWeekPlan.Where(entry => entry.Day == DayOfWeek.Friday).Should().Count.AtLeast(approxExercisesPerDay);
+                            }
+                            ).andIn(
                             () =>
                                 {
-                                    var approxExercisesPerDay = numberOfExercisesInDatabase/5;
-                                    currentWeekPlan.Where(entry => entry.Day == DayOfWeek.Monday).Should().Count.AtLeast(approxExercisesPerDay);
-                                    currentWeekPlan.Where(entry => entry.Day == DayOfWeek.Tuesday).Should().Count.AtLeast(approxExercisesPerDay);
-                                    currentWeekPlan.Where(entry => entry.Day == DayOfWeek.Wednesday).Should().Count.AtLeast(approxExercisesPerDay);
-                                    currentWeekPlan.Where(entry => entry.Day == DayOfWeek.Thursday).Should().Count.AtLeast(approxExercisesPerDay);
-                                    currentWeekPlan.Where(entry => entry.Day == DayOfWeek.Friday).Should().Count.AtLeast(approxExercisesPerDay);
+                                    currentWeekPlan.Where(entry => entry.Day == DayOfWeek.Saturday).Should().Be.Empty();
+                                    currentWeekPlan.Where(entry => entry.Day == DayOfWeek.Sunday).Should().Be.Empty();
                                 }
                             );
+                    });
 
+            "and the creating a new plan for the current week".should(
+                () =>
+                    {
+                        var newCurrentWeekPlan = weekPlanRepository.CreateWeekPlanFor(DanishClaendar.CurrentWeek);
+                        "be different from the old one".asIn(
+                            () =>
+                                {
+                                    if (numberOfExercisesInDatabase > 4)
+                                        newCurrentWeekPlan.SequenceEqual(currentWeekPlan).Should().Be.False();
+                                });
                     });
         }
 

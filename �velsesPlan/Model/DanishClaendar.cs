@@ -6,7 +6,7 @@ namespace ØvelsesPlan.Model
     public static class DanishClaendar
     {
         private static readonly CultureInfo Danish = new CultureInfo("da-DK");
-        public static int Current
+        public static int CurrentWeek
         {
             get
             {

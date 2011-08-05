@@ -13,5 +13,19 @@ namespace ØvelsesPlan.Model
 
         public Exercise Exercise { get; private set; }
         public DayOfWeek Day { get; private set; }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+                return false;
+
+            var rhs = obj as WeekPlanEntry;
+            return this.Exercise.Name == rhs.Exercise.Name && this.Day == rhs.Day;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }

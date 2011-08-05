@@ -751,6 +751,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExercisePlannerModule.cs" />
+    <Compile Include="Helpers\ListHelpers.cs" />
     <Compile Include="Model\Exercise.cs" />
     <Compile Include="Model\ExerciseRepository.cs" />
     <Compile Include="Model\WeekPlanEntry.cs" />

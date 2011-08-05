@@ -42,23 +42,33 @@ namespace ØvelsesPlan
             Get["weekplan/current"] = _ =>
                                           {
                                               var currentWeekPlan = new WeekPlanRepository().GetCurrentWeekPlan();
-                                              var flatWeekPlan = currentWeekPlan
-                                                  .Select(entry =>
-                                                          new[]
-                                                              {
-                                                                  DanishClaendar.WeekDayNameFor(entry.Day),
-                                                                  entry.Exercise.Name
-                                                              })
-                                                  .ToArray();
-
-                                              return
-                                                  Response.AsJson(new { aaData = flatWeekPlan});
+                                              return CreateJsonResponseFor(currentWeekPlan);
                                           };
 
             Post["exercises/create"] = _ => "creating...";
             Post["exercises/delete"] = _ => "deleting";
             Post["exercises/edit"] = _ => "editing";
-            Post["weekplan/create"] = _ => "alert(\"creating weekplan\")";
+            Post["weekplan/create"] = _ =>
+                                          {
+                                              var newWeekPlan =
+                                                  new WeekPlanRepository().CreateWeekPlanFor(DanishClaendar.CurrentWeek);
+                                              return CreateJsonResponseFor(newWeekPlan);
+                                          };
+        }
+
+        private Response CreateJsonResponseFor(WeekPlan currentWeekPlan)
+        {
+            var flatWeekPlan = currentWeekPlan
+                .Select(entry =>
+                        new[]
+                            {
+                                DanishClaendar.WeekDayNameFor(entry.Day),
+                                entry.Exercise.Name
+                            })
+                .ToArray();
+
+            return
+                Response.AsJson(new { aaData = flatWeekPlan});
         }
     }
 }

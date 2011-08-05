@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using ØvelsesPlan.Helpers;
 
 namespace ØvelsesPlan.Model
 {
@@ -9,28 +10,33 @@ namespace ØvelsesPlan.Model
     {
         public WeekPlan GetCurrentWeekPlan()
         {
-            return new WeekPlan(DanishClaendar.Current);
+            return new WeekPlan(DanishClaendar.CurrentWeek);
+        }
+
+        public WeekPlan CreateWeekPlanFor(int week)
+        {
+           return new WeekPlan(week);
         }
     }
 
     public class WeekPlan : IEnumerable<WeekPlanEntry>
     {
         private readonly List<WeekPlanEntry> plan = new List<WeekPlanEntry>();
-        private List<Exercise> exercisesInPlan;
+        private readonly List<Exercise> exercisesInPlan;
 
         public WeekPlan(int weekNumber)
         {
             WeekNumber = weekNumber;
-            
-            exercisesInPlan = new ExerciseRepository().GetAll().ToList();
+
+            exercisesInPlan = new ExerciseRepository().GetAll().Shuffle().ToList();
 
             CreatePlan();
         }
 
         private void CreatePlan()
         {
-            var exercisesPerDay = exercisesInPlan.Count/5;
-            var daysWithAnExtraExercise = exercisesInPlan.Count%5;
+            var exercisesPerDay = exercisesInPlan.Count()/5;
+            var daysWithAnExtraExercise = exercisesInPlan.Count()%5;
 
             AddPlanFor(DayOfWeek.Monday, exercisesPerDay, daysWithAnExtraExercise);
             AddPlanFor(DayOfWeek.Tuesday, exercisesPerDay, daysWithAnExtraExercise);

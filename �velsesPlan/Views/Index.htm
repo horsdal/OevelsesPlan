@@ -16,8 +16,20 @@
 		        var oTable = $('#exercises').dataTable({
 		            "bProcessing": true,
 		            "sAjaxSource": "weekplan/current",
-                    "bSort": false })
+		            "bSort": false
 		        });
+
+		        /* Add a click handler for the delete row */
+		        $('#new_plan_for_week').click(function () {
+		            event.preventDefault();
+		            $.post("weekplan/create", { weeknumber: "current" },
+                        function (data) {
+                            oTable.fnClearTable(false);
+                            oTable.fnAddData(data.aaData);
+                        });
+		        });
+		    });
+
 		</script>
 </head>
 <body id="dt_example">
