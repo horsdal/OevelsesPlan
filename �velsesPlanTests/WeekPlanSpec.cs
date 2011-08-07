@@ -33,7 +33,7 @@ namespace ØvelsesPlanTests
                     });
         }
 
-        [Theory, 
+        [Theory,
         InlineData(1), InlineData(4), InlineData(5), InlineData(6), InlineData(7), InlineData(8),
         InlineData(42)]
         public void when_database_has_only_active_exercises(int numberOfExercisesInDatabase)
@@ -46,38 +46,44 @@ namespace ØvelsesPlanTests
                 () =>
                     {
                         "be for the current week".asIn(
-                                () => currentWeekPlan.WeekNumber.Should().Equal(DanishClaendar.CurrentWeek)
+                            () => currentWeekPlan.WeekNumber.Should().Equal(DanishClaendar.CurrentWeek)
                             );
 
                         "contain all exercises".asIn(
-                                () =>
-                                    {
-                                        currentWeekPlan.Should().Count.Exactly(numberOfExercisesInDatabase);
-                                        for (int i = 0; i < numberOfExercisesInDatabase; i++)
-                                           currentWeekPlan.Should().Contain.Any(entry => entry.Exercise.Name == "Hop" + i);
-                                    }
+                            () =>
+                                {
+                                    currentWeekPlan.Should().Count.Exactly(numberOfExercisesInDatabase);
+                                    for (int i = 0; i < numberOfExercisesInDatabase; i++)
+                                        currentWeekPlan.Should().Contain.Any(entry => entry.Exercise.Name == "Hop" + i);
+                                }
                             );
 
                         "have exercises evenly distributed on weekdays".asIn(
                             () =>
-                            {
-                                var approxExercisesPerDay = numberOfExercisesInDatabase / 5;
-                                currentWeekPlan.Where(entry => entry.Day == DayOfWeek.Monday).Should().Count.AtLeast(approxExercisesPerDay);
-                                currentWeekPlan.Where(entry => entry.Day == DayOfWeek.Tuesday).Should().Count.AtLeast(approxExercisesPerDay);
-                                currentWeekPlan.Where(entry => entry.Day == DayOfWeek.Wednesday).Should().Count.AtLeast(approxExercisesPerDay);
-                                currentWeekPlan.Where(entry => entry.Day == DayOfWeek.Thursday).Should().Count.AtLeast(approxExercisesPerDay);
-                                currentWeekPlan.Where(entry => entry.Day == DayOfWeek.Friday).Should().Count.AtLeast(approxExercisesPerDay);
-                            }
-                            ).andIn(
-                            () =>
                                 {
-                                    currentWeekPlan.Where(entry => entry.Day == DayOfWeek.Saturday).Should().Be.Empty();
-                                    currentWeekPlan.Where(entry => entry.Day == DayOfWeek.Sunday).Should().Be.Empty();
+                                    var approxExercisesPerDay = numberOfExercisesInDatabase/5;
+                                    currentWeekPlan.Where(entry => entry.Day == DayOfWeek.Monday).Should().Count.AtLeast
+                                        (approxExercisesPerDay);
+                                    currentWeekPlan.Where(entry => entry.Day == DayOfWeek.Tuesday).Should().Count.
+                                        AtLeast(approxExercisesPerDay);
+                                    currentWeekPlan.Where(entry => entry.Day == DayOfWeek.Wednesday).Should().Count.
+                                        AtLeast(approxExercisesPerDay);
+                                    currentWeekPlan.Where(entry => entry.Day == DayOfWeek.Thursday).Should().Count.
+                                        AtLeast(approxExercisesPerDay);
+                                    currentWeekPlan.Where(entry => entry.Day == DayOfWeek.Friday).Should().Count.AtLeast
+                                        (approxExercisesPerDay);
                                 }
+                            ).andIn(
+                                () =>
+                                    {
+                                        currentWeekPlan.Where(entry => entry.Day == DayOfWeek.Saturday).Should().Be.
+                                            Empty();
+                                        currentWeekPlan.Where(entry => entry.Day == DayOfWeek.Sunday).Should().Be.Empty();
+                                    }
                             );
                     });
 
-            "and the creating a new plan for the current week".should(
+            "and creating a new plan for the current week".should(
                 () =>
                     {
                         var newCurrentWeekPlan = weekPlanRepository.CreateWeekPlanFor(DanishClaendar.CurrentWeek);
@@ -86,6 +92,23 @@ namespace ØvelsesPlanTests
                                 {
                                     if (numberOfExercisesInDatabase > 4)
                                         newCurrentWeekPlan.SequenceEqual(currentWeekPlan).Should().Be.False();
+                                });
+                    });
+
+            "Flattening a week plan".should(
+                () =>
+                    {
+                        var flatWeekPlan = currentWeekPlan.Flatten().ToArray();
+                        "result in a list of strings, the same length as the number of active exercises in the datastore".asIn(
+                            () => flatWeekPlan.Should().Count.Exactly(numberOfExercisesInDatabase));
+                        "each such string is a flat weekplan entry".asIn(
+                            () =>
+                                {
+                                    var weekPlanArr = currentWeekPlan.ToArray();
+                                    for (int i = 0; i < numberOfExercisesInDatabase; i++)
+                                    {
+                                        flatWeekPlan[i].Should().Equal(weekPlanArr[i].Flatten());
+                                    }
                                 });
                     });
         }
