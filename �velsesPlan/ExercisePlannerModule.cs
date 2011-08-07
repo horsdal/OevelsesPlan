@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Nancy;
 using ØvelsesPlan.Model;
@@ -10,61 +11,33 @@ namespace ØvelsesPlan
         public ExercisePlannerModule()
         {
             var weekPlans = new WeekPlanRepository();
+            var exerciseRepo = new ExerciseRepository();
 
             Get["/"] = _ => View["Index.htm"];
             Get["exercises/"] = _ => View["Exercises.htm"];
-            Get["exercises/all"] = _ => 
-                                       {
-                                           var res =
-                                               Response.AsJson(
-                                               new
-                                               {
-                                                   aaData =
-                                                       new[]
-                                                       {
-                                                           new[] {"Hop", "Ryg", "Trapezius", "Ja"}, 
-                                                           new[] {"Dans", "Lår", "Quadrozeps pemoris", "Ja"},
-                                                           new[] {"Syng", "Sind", "Humør", "Nej"}
-                                                       }
-                                               });
-                                           return res;
-                                       };
-            Get["exercises/create"] = _ =>
-                                          {
-                                              var exercises = new ExerciseRepository();
-                                              exercises.Clear();
-                                              for (int i = 0; i < 66; i++)
-                                                  exercises.Create(new Exercise(name: "Hop" + i, muscleGroup: "Lår",
-                                                                                muscle: "Quadrozeps pemoris",
-                                                                                active: true));
-                                              return View["CreateExercise.htm"];
-                                          };
-            Get["weekplan/current"] = _ =>
-                                          {
-                                              var currentWeekPlan = new WeekPlanRepository().GetCurrentWeekPlan();
-                                              return CreateJsonResponseFor(currentWeekPlan);
-                                          };
+            Get["exercises/all"] = _ => CreateJsonResponseFor(exerciseRepo.GetAll());
+                                      
+            Get["weekplan/current"] = _ => CreateJsonResponseFor(new WeekPlanRepository().GetCurrentWeekPlan());
 
-            Post["exercises/create"] = _ => "creating...";
+            Post["exercises/create"] = _ => Response.AsJson(exerciseRepo.Add(new Exercise(name: "Ny øvelse", muscleGroup: "muskelgruppe", muscle: "muskel", active:true, description:"beskrivelse")).Flatten());
             Post["exercises/delete"] = _ => "deleting";
-            Post["exercises/edit"] = _ => "editing";
-            Post["weekplan/create"] = _ =>
-                                          {
-                                              var newWeekPlan =
-                                                  new WeekPlanRepository().CreateWeekPlanFor(DanishClaendar.CurrentWeek);
-                                              return CreateJsonResponseFor(newWeekPlan);
-                                          };
+            Post["exercises/edit/"] = _ => { return Request.Form.value; };
+            Post["weekplan/create"] = _ => CreateJsonResponseFor(weekPlans.CreateWeekPlanFor(DanishClaendar.CurrentWeek));
+        }
+
+        private Response CreateJsonResponseFor(IEnumerable<Exercise> exercises)
+        {
+            var flatExerciseArray = exercises
+                .Select(exercise => exercise.Flatten())
+                .ToArray();
+
+            return Response.AsJson(new {aaData = flatExerciseArray});
         }
 
         private Response CreateJsonResponseFor(WeekPlan currentWeekPlan)
         {
             var flatWeekPlan = currentWeekPlan
-                .Select(entry =>
-                        new[]
-                            {
-                                DanishClaendar.WeekDayNameFor(entry.Day),
-                                entry.Exercise.Name
-                            })
+                .Select(entry => entry.Flatten())
                 .ToArray();
 
             return

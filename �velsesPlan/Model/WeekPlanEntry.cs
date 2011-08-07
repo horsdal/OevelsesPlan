@@ -27,5 +27,14 @@ namespace ØvelsesPlan.Model
         {
             return base.GetHashCode();
         }
+
+        public string[] Flatten()
+        {
+            return new[]
+                       {
+                           DanishClaendar.WeekDayNameFor(Day),
+                           Exercise.Name
+                       };
+        }
     }
 }

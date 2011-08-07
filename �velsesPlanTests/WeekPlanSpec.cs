@@ -95,7 +95,7 @@ namespace ØvelsesPlanTests
             var exercises = new ExerciseRepository();
             exercises.Clear();
             for (int i = 0; i < numberOfExercisesInDatabase; i++)
-                exercises.Create(new Exercise(name: "Hop" + i, muscleGroup: "Lår", muscle: "Quadrozeps pemoris", active: true));
+                exercises.Add(new Exercise(name: "Hop" + i, muscleGroup: "Lår", muscle: "Quadrozeps pemoris", active: true, description: "Foo"));
         }
     }
 }

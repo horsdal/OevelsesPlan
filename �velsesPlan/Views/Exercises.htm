@@ -44,7 +44,15 @@
                         });
 		        });
 
-
+		        /* Add a click handler for the create row */
+		        $('#create_exercise').click(function () {
+		            event.preventDefault();
+		            $.post("create",
+                        function (new_exercise) {
+                            oTable.fnAddData(new_exercise);
+                            fnMakeEditable(oTable);
+                        });
+		        });
 		    });
 
               /* Apply the jEditable handlers to the table */
@@ -99,7 +107,7 @@
 	</tbody>
 </table>
             <p><a href="javascript:void(0)" id="delete_exercise">Slet den valgte øvelse</a></p>
-            <p><a href="create" id="create_exercise">Ny øvelse</a></p>
+            <p><a href="javascript:void(0)" id="create_exercise">Ny øvelse</a></p>
             </div>
             </div>
 </body>
