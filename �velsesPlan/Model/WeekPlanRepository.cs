@@ -78,5 +78,10 @@ namespace ØvelsesPlan.Model
         {
             return GetEnumerator();
         }
+
+        public IEnumerable<string[]> Flatten()
+        {
+            return plan.Select(entry => entry.Flatten());
+        }
     }
 }

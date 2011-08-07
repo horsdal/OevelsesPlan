@@ -15,31 +15,14 @@ namespace ØvelsesPlan
 
             Get["/"] = _ => View["Index.htm"];
             Get["exercises/"] = _ => View["Exercises.htm"];
-            Get["exercises/all"] = _ => CreateJsonResponseFor(exerciseRepo.GetAll());
+            Get["exercises/all"] = _ => Response.AsJson(new {aaData = exerciseRepo.GetAll()});
                                       
-            Get["weekplan/current"] = _ => CreateJsonResponseFor(new WeekPlanRepository().GetCurrentWeekPlan());
+            Get["weekplan/current"] = _ => Response.AsJson(new { aaData = new WeekPlanRepository().GetCurrentWeekPlan().Flatten()});
 
             Post["exercises/create"] = _ => Response.AsJson(exerciseRepo.Add(new Exercise(name: "Ny øvelse", muscleGroup: "muskelgruppe", muscle: "muskel", active:true, description:"beskrivelse")));
             Post["exercises/delete"] = _ => "deleting";
-            Post["exercises/edit/"] = _ => { return Request.Form.value.Value ; };
-            Post["weekplan/create"] = _ => CreateJsonResponseFor(weekPlans.CreateWeekPlanFor(DanishClaendar.CurrentWeek));
-        }
-
-        private Response CreateJsonResponseFor(IEnumerable<Exercise> exercises)
-        {
-            var flatExerciseArray = exercises.ToArray();
-
-            return Response.AsJson(new {aaData = flatExerciseArray});
-        }
-
-        private Response CreateJsonResponseFor(WeekPlan currentWeekPlan)
-        {
-            var flatWeekPlan = currentWeekPlan
-                .Select(entry => entry.Flatten())
-                .ToArray();
-
-            return
-                Response.AsJson(new { aaData = flatWeekPlan});
+            Post["exercises/edit/"] = _ => { return Request.Form.value.Value; };
+            Post["weekplan/create"] = _ => Response.AsJson(new { aaData = weekPlans.CreateWeekPlanFor(DanishClaendar.CurrentWeek).Flatten()});
         }
     }
 }
