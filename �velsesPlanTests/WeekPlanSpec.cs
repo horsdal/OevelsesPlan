@@ -25,11 +25,7 @@ namespace ØvelsesPlanTests
 
                         "contain an empty list of exercises for each weekday".asIn
                             (
-                                () =>
-                                    {
-                                        currentWeekPlan.Should().Be.Empty();
-                                    }
-                            );
+                                () => currentWeekPlan.Should().Be.Empty());
                     });
         }
 
@@ -49,7 +45,7 @@ namespace ØvelsesPlanTests
                             () => currentWeekPlan.WeekNumber.Should().Equal(DanishClaendar.CurrentWeek)
                             );
 
-                        "contain all exercises".asIn(
+                        ("contain all " + numberOfExercisesInDatabase + " exercises").asIn(
                             () =>
                                 {
                                     currentWeekPlan.Should().Count.Exactly(numberOfExercisesInDatabase);
@@ -95,7 +91,7 @@ namespace ØvelsesPlanTests
                                 });
                     });
 
-            "Flattening a week plan".should(
+            "and flattening the week plan".should(
                 () =>
                     {
                         var flatWeekPlan = currentWeekPlan.Flatten().ToArray();
