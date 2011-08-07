@@ -19,17 +19,15 @@ namespace ØvelsesPlan
                                       
             Get["weekplan/current"] = _ => CreateJsonResponseFor(new WeekPlanRepository().GetCurrentWeekPlan());
 
-            Post["exercises/create"] = _ => Response.AsJson(exerciseRepo.Add(new Exercise(name: "Ny øvelse", muscleGroup: "muskelgruppe", muscle: "muskel", active:true, description:"beskrivelse")).Flatten());
+            Post["exercises/create"] = _ => Response.AsJson(exerciseRepo.Add(new Exercise(name: "Ny øvelse", muscleGroup: "muskelgruppe", muscle: "muskel", active:true, description:"beskrivelse")));
             Post["exercises/delete"] = _ => "deleting";
-            Post["exercises/edit/"] = _ => { return Request.Form.value.Value; };
+            Post["exercises/edit/"] = _ => { return Request.Form.value.Value ; };
             Post["weekplan/create"] = _ => CreateJsonResponseFor(weekPlans.CreateWeekPlanFor(DanishClaendar.CurrentWeek));
         }
 
         private Response CreateJsonResponseFor(IEnumerable<Exercise> exercises)
         {
-            var flatExerciseArray = exercises
-                .Select(exercise => exercise.Flatten())
-                .ToArray();
+            var flatExerciseArray = exercises.ToArray();
 
             return Response.AsJson(new {aaData = flatExerciseArray});
         }

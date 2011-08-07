@@ -16,6 +16,12 @@
 		        var oTable = $('#exercises').dataTable({
 		            "bProcessing": true,
 		            "sAjaxSource": "all",
+		            "aoColumns": [
+                    	{ "mDataProp": "Name" },
+                        { "mDataProp": "MuscleGroup" },
+			            { "mDataProp": "Muscle" },
+			            { "mDataProp": "ActiveText" },
+		            ],
 		            "fnInitComplete": function () { fnMakeEditable(oTable) }
 		        });
 

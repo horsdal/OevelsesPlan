@@ -4,6 +4,8 @@ namespace ØvelsesPlan.Model
 {
     public class Exercise
     {
+        private static int id = 0;
+
         public Exercise(string name, string muscleGroup, string muscle, bool active, string description)
         {
             Name = name;
@@ -11,6 +13,7 @@ namespace ØvelsesPlan.Model
             Muscle = muscle;
             Active = active;
             Description = description;
+            Id = (++id).ToString();
         }
 
         public string Name { get; set; }
@@ -19,6 +22,8 @@ namespace ØvelsesPlan.Model
         public string Muscle { get; set; }
         public bool Active { get; set; }
         public string Description { get; set; }
+        public string ActiveText { get { return Active ? "Ja" : "Nej"; } }
+        public string DT_RowId { get { return Id; } }
 
         public override bool Equals(object obj)
         {
@@ -29,18 +34,6 @@ namespace ØvelsesPlan.Model
             var rhs = obj as Exercise;
             return this.Id == rhs.Id && this.Name == rhs.Name && this.MuscleGroup == rhs.MuscleGroup &&
                    this.Muscle == rhs.Muscle && this.Active == rhs.Active && this.Description == rhs.Description;
-        }
-
-        public string[] Flatten()
-        {
-            return new[]
-                       {
-                           Name,
-                           MuscleGroup,
-                           Muscle,
-                           Active ? "Ja" : "Nej",
-                           Description
-                       };
         }
     }
 }
