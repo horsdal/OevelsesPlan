@@ -23,11 +23,6 @@ namespace ØvelsesPlan.Model
             return this.Exercise.Name == rhs.Exercise.Name && this.Day == rhs.Day;
         }
 
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
-
         public string[] Flatten()
         {
             return new[]

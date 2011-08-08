@@ -61,14 +61,14 @@ namespace ØvelsesPlan.Model
             return plan.GetEnumerator();
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-
         public IEnumerable<string[]> Flatten()
         {
             return plan.Select(entry => entry.Flatten());
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

@@ -21,7 +21,13 @@ namespace ØvelsesPlan
 
             Post["exercises/create"] = _ => Response.AsJson(exerciseRepo.Add(new Exercise(name: "Ny øvelse", muscleGroup: "muskelgruppe", muscle: "muskel", active:true, description:"beskrivelse")));
             Post["exercises/delete"] = _ => "deleting";
-            Post["exercises/edit/"] = _ => { return Request.Form.value.Value; };
+            Post["exercises/edit/"] = _ =>
+                                          {
+                                              Exercise exerciseToUpdate = exerciseRepo.GetById(Request.Form.row_id.Value);
+                                              exerciseToUpdate.UpdatePropertyNumber(Request.Form.column.Value, Request.Form.value.Value);
+                                              exerciseRepo.Update(exerciseToUpdate);
+                                              return Request.Form.value.Value;
+                                          };
             Post["weekplan/create"] = _ => Response.AsJson(new { aaData = weekPlans.CreateWeekPlanFor(DanishClaendar.CurrentWeek).Flatten()});
         }
     }
