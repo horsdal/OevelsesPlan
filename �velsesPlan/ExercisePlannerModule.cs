@@ -24,7 +24,8 @@ namespace ØvelsesPlan
             Post["exercises/edit/"] = _ =>
                                           {
                                               Exercise exerciseToUpdate = exerciseRepo.GetById(Request.Form.row_id.Value);
-                                              exerciseToUpdate.UpdatePropertyNumber(Request.Form.column.Value, Request.Form.value.Value);
+                                              var columnNumber = (Exercise.PropertyNumbers) int.Parse(Request.Form.column.Value);
+                                              exerciseToUpdate.UpdatePropertyNumber(columnNumber, Request.Form.value.Value);
                                               exerciseRepo.Update(exerciseToUpdate);
                                               return Request.Form.value.Value;
                                           };
