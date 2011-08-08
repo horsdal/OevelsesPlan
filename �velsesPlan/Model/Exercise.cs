@@ -7,13 +7,18 @@ namespace ØvelsesPlan.Model
         private static int id = 0;
 
         public Exercise(string name, string muscleGroup, string muscle, bool active, string description)
+            : this((++id).ToString(), name,muscleGroup, muscle, active, description)
+        {
+        }
+
+        public Exercise(string id, string name, string muscleGroup, string muscle, bool active, string description)
         {
             Name = name;
             MuscleGroup = muscleGroup;
             Muscle = muscle;
             Active = active;
             Description = description;
-            Id = (++id).ToString();
+            Id = id;
         }
 
         public string Name { get; set; }

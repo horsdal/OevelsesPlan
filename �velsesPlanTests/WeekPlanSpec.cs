@@ -13,6 +13,8 @@ namespace ØvelsesPlanTests
         [Fact]
         public void when_database_is_empty()
         {
+            new ExerciseRepository().Clear();
+
             "The current weekplan".should(
                 () =>
                     {

@@ -27,7 +27,7 @@ namespace ØvelsesPlan.Model
         public Exercise GetById(string id)
         {
             var exerciseToFind = Exercises.Find(e => e.Id == id);
-            return exerciseToFind != null ? new Exercise(exerciseToFind.Name, exerciseToFind.MuscleGroup, exerciseToFind.Muscle, exerciseToFind.Active, exerciseToFind.Description) : null;
+            return exerciseToFind != null ? new Exercise(id, exerciseToFind.Name, exerciseToFind.MuscleGroup, exerciseToFind.Muscle, exerciseToFind.Active, exerciseToFind.Description) : null;
         }
 
         public void Update(Exercise updatedExercise)
