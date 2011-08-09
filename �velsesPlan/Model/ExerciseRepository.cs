@@ -32,13 +32,13 @@ namespace ØvelsesPlan.Model
 
         public void Update(Exercise updatedExercise)
         {
-            Exercises.RemoveAll(e => e.Id == updatedExercise.Id);
+            Delete(updatedExercise.Id);
             Add(updatedExercise);
         }
 
-        public void Delete(Exercise exercise)
+        public void Delete(string id)
         {
-            Exercises.Remove(exercise);
+            Exercises.RemoveAll(e => e.Id == id);
         }
     }
 }

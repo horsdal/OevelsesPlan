@@ -13,7 +13,16 @@
 
 		<script type="text/javascript" charset="utf-8">
 		    $(document).ready(function () {
-		        var oTable = $('#exercises').dataTable({
+		        /* Add a click handler to the rows - this could be used as a callback */
+		        $("#exercises tbody").click(function (event) {
+		            $(oTable.fnSettings().aoData).each(function () {
+		                $(this.nTr).removeClass('row_selected');
+		            });
+		            $(event.target.parentNode.parentNode.parentNode).addClass('row_selected');
+		        });
+
+                
+                var oTable = $('#exercises').dataTable({
 		            "bProcessing": true,
 		            "sAjaxSource": "all",
 		            "aoColumns": [
@@ -25,29 +34,18 @@
 		            "fnInitComplete": function () { fnMakeEditable(oTable) }
 		        });
 
-		        /* Add a click handler to the rows - this could be used as a callback */
-		        $("#exercises tbody").click(function (event) {
-		            $(oTable.fnSettings().aoData).each(function () {
-		                $(this.nTr).removeClass('row_selected');
-		            });
-		            $(event.target.parentNode).addClass('row_selected');
-		        });
-
 		        /* Add a click handler for the delete row */
 		        $('#delete_exercise').click(function () {
 		            var anSelected = fnGetSelected(oTable);
-		            oTable.fnDeleteRow(
-                        anSelected[0],
-                        function () {
-                            $.ajax({
+                     $.ajax({
                                 type: "POST",
                                 url: "delete",
-                                data: anSelected,
+                                data: {row_id: anSelected[0].id}, 
                                 success: function (msg) {
                                     alert("Data Deleted: " + msg);
+                                    oTable.fnDeleteRow(anSelected[0])
                                 }
                             });
-                        });
 		        });
 
 		        /* Add a click handler for the create row */

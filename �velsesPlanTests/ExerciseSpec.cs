@@ -44,7 +44,7 @@ namespace ØvelsesPlanTests
                                 }).andIn(
                                 () =>
                                     {
-                                        exerciseRepo.Delete(exercise);
+                                        exerciseRepo.Delete(exercise.Id);
 
                                         var deletedExercise = exerciseRepo.GetById(exercise.Id);
 
