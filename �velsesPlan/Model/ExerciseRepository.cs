@@ -36,9 +36,16 @@ namespace ØvelsesPlan.Model
             Add(updatedExercise);
         }
 
-        public void Delete(string id)
+        public void UpdateByExerciseIdByPropertyNumber(string exerciseId, Exercise.PropertyNumbers columnNumber, string newValue)
         {
-            Exercises.RemoveAll(e => e.Id == id);
+            var exerciseToUpdate = GetById(exerciseId);
+            exerciseToUpdate.UpdatePropertyNumber(columnNumber, newValue);
+            Update(exerciseToUpdate);
+        }
+
+        public bool Delete(string id)
+        {
+            return Exercises.RemoveAll(e => e.Id == id) == 1;
         }
     }
 }

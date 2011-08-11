@@ -1,6 +1,9 @@
-﻿using Should.Fluent;
+﻿using System;
+using Ploeh.AutoFixture.Xunit;
+using Should.Fluent;
 using Xunit;
 using Specs;
+using Xunit.Extensions;
 using ØvelsesPlan.Model;
 
 namespace ØvelsesPlanTests
@@ -54,12 +57,11 @@ namespace ØvelsesPlanTests
                     });
         }
 
-        [Fact]
-        public void GivenAnExercise()
+        [Theory, AutoData]
+        public void GivenAnExercise(Exercise sut)
         {
-            var sut = new Exercise(name: "Foo", muscleGroup: "Bar", muscle: "Baz", active: true, description: "Blah");
             var originalId = sut.Id;
-            "Updating to exercise by column number".should(
+            "Updating the exercise directly by column number".should(
                 () =>
                     {
                         "update the name if the column number is 0".asIn(
@@ -97,6 +99,46 @@ namespace ØvelsesPlanTests
                             () => sut.Id.Should().Equal(originalId)
                             );
                     });
+
+            "Updating the exercise through the repository by column number".should(
+                () =>
+                    {
+                        var exercises = new ExerciseRepository();
+                    "update the name if the column number is 0".asIn(
+                        () =>
+                        {
+                            exercises.UpdateByExerciseIdByPropertyNumber(sut.DT_RowId, Exercise.PropertyNumbers.Name, "newnewName");
+                            sut.Name.Should().Equal("newnewName");
+                        });
+                    "update the musclegroup if the column number is 1".asIn(
+                        () =>
+                        {
+                            exercises.UpdateByExerciseIdByPropertyNumber(sut.DT_RowId, Exercise.PropertyNumbers.MuscleGroup, "newnewMuscleGroup");
+                            sut.MuscleGroup.Should().Equal("newnewMuscleGroup");
+                        });
+                    "update the muscle if the column number is 2".asIn(
+                        () =>
+                        {
+                            exercises.UpdateByExerciseIdByPropertyNumber(sut.DT_RowId, Exercise.PropertyNumbers.Muscle, "newnewMuscle");
+                            sut.Muscle.Should().Equal("newnewMuscle");
+                        });
+                    "update the musclegroup if the column number is 3".asIn(
+                        () =>
+                        {
+                            exercises.UpdateByExerciseIdByPropertyNumber(sut.DT_RowId, Exercise.PropertyNumbers.ActiveText, "Ja");
+                            sut.Active.Should().Be.False();
+                            sut.ActiveText.Should().Equal("Ja");
+                        });
+                    "update the description if the column number is 4".asIn(
+                        () =>
+                        {
+                            exercises.UpdateByExerciseIdByPropertyNumber(sut.DT_RowId, Exercise.PropertyNumbers.Description, "newnewDescription");
+                            sut.Description.Should().Equal("newnewDescription");
+                        });
+                    "while leaving the id the same".asIn(
+                        () => sut.Id.Should().Equal(originalId)
+                        );
+                });
 
             "The DT_RowId".should(
                 () => "be a serialization of the Id".asIn(
