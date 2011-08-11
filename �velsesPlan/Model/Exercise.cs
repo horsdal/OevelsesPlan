@@ -50,24 +50,24 @@ namespace ØvelsesPlan.Model
                    this.Muscle == rhs.Muscle && this.Active == rhs.Active && this.Description == rhs.Description;
         }
 
-        public void UpdatePropertyNumber(PropertyNumbers propertyNumber, object newValue)
+        public void UpdatePropertyNumber(PropertyNumbers propertyNumber, string newValue)
         {
             switch (propertyNumber)
             {
                 case PropertyNumbers.Name:
-                    Name = (string) newValue;
+                    Name = newValue;
                     break;
                 case PropertyNumbers.MuscleGroup:
-                    MuscleGroup = (string) newValue;
+                    MuscleGroup = newValue;
                     break;
                 case PropertyNumbers.Muscle:
-                    Muscle = (string) newValue;
+                    Muscle = newValue;
                     break;
                 case PropertyNumbers.ActiveText:
-                    Active = (bool) newValue;
+                    Active = newValue == "Ja" ? true : false;
                     break;
                 case PropertyNumbers.Description:
-                    Description = (string) newValue;
+                    Description = newValue;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("propertyNumber");

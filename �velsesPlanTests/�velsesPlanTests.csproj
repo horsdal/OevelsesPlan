@@ -34,14 +34,9 @@
     <Reference Include="Nancy">
       <HintPath>..\packages\Nancy.0.6.0\lib\4.0\Nancy.dll</HintPath>
     </Reference>
-    <Reference Include="Ploeh.AutoFixture">
-      <HintPath>..\packages\AutoFixture.2.1\lib\Ploeh.AutoFixture.dll</HintPath>
-    </Reference>
-    <Reference Include="Ploeh.AutoFixture.Xunit">
-      <HintPath>..\packages\AutoFixture.Xunit.2.1\lib\Ploeh.AutoFixture.Xunit.dll</HintPath>
-    </Reference>
-    <Reference Include="Ploeh.SemanticComparison">
-      <HintPath>..\packages\AutoFixture.2.1\lib\Ploeh.SemanticComparison.dll</HintPath>
+    <Reference Include="Ploeh.AutoFixture.Xunit, Version=2.1.0.1, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\AutoFixture 2.0\Ploeh.AutoFixture.Xunit.dll</HintPath>
     </Reference>
     <Reference Include="Should.Fluent">
       <HintPath>..\packages\ShouldFluent.1.1.12.0\lib\Should.Fluent.dll</HintPath>
@@ -56,11 +51,13 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="xunit">
-      <HintPath>..\packages\xunit.1.8.0.1545\lib\xunit.dll</HintPath>
+    <Reference Include="xunit, Version=1.7.0.1540, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\xunit\xunit.dll</HintPath>
     </Reference>
-    <Reference Include="xunit.extensions">
-      <HintPath>..\packages\xunit.extensions.1.8.0.1545\lib\xunit.extensions.dll</HintPath>
+    <Reference Include="xunit.extensions, Version=1.7.0.1540, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\xunit\xunit.extensions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
