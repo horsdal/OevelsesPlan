@@ -15,10 +15,7 @@ namespace ØvelsesPlan
             Get["exercises/"] = _ => View["Exercises.htm"];
             Get["exercises/all"] = _ => Response.AsJson(new {aaData = exercises.GetAll()});
             Post["exercises/create"] = _ => Response.AsJson(exercises.Add(new Exercise(name: "Ny øvelse", muscleGroup: "muskelgruppe", muscle: "muskel", active:true, description:"beskrivelse")));
-            Post["exercises/delete"] = _ =>
-                new Response { StatusCode =
-                    exercises.Delete(Request.Form.row_id.Value) ? HttpStatusCode.OK : HttpStatusCode.NotModified
-                };
+            Post["exercises/delete"] = _ => exercises.Delete(Request.Form.row_id.Value) ? HttpStatusCode.OK : HttpStatusCode.NotModified;
             Post["exercises/edit/"] = _ => EditExerciseProperty();
 
             Get["weekplan/current"] = _ => Response.AsJson(new { aaData = new WeekPlanRepository().GetCurrentWeekPlan().Flatten() });
