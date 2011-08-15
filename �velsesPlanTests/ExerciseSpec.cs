@@ -1,6 +1,8 @@
-﻿using Ploeh.AutoFixture.Xunit;
+﻿using System.Linq;
+using MongoDB.Driver;
+using MongoDB.Driver.Builders;
+using Ploeh.AutoFixture.Xunit;
 using Should.Fluent;
-using Xunit;
 using Specs;
 using Xunit.Extensions;
 using ØvelsesPlan.Model;
@@ -9,8 +11,8 @@ namespace ØvelsesPlanTests
 {
     public class ExerciseSpec
     {
-        [Fact]
-        public void CRUDTest()
+        [Theory, AutoData]
+        public void CRUDTest(Exercise inputExercise)
         {
             "The exercise data store".should(
                 () =>
@@ -19,31 +21,31 @@ namespace ØvelsesPlanTests
                         Exercise exercise = null, retrievedExercise = null, exerciseAfterUpdate;
 
                         "Support all the CRUD operations on a single exercise".asIn(
-                            () => exercise = exerciseRepo.Add(
-                                new Exercise(name: "Hip", muscleGroup: "Arm", muscle: "Bicpes", active:true, description: "Blah. 2 repetitioner" ))
+                            () => exercise = exerciseRepo.Add(inputExercise)
                             ).andIn(
-                            () =>
-                                {
-                                    retrievedExercise = exerciseRepo.GetById(exercise.Id);
+                                () =>
+                                    {
+                                        retrievedExercise = exerciseRepo.GetById(exercise.Id);
 
-                                    retrievedExercise.Should().Equal(exercise);
-                                    retrievedExercise.Name.Should().Equal(exercise.Name);
-                                    retrievedExercise.MuscleGroup.Should().Equal(exercise.MuscleGroup);
-                                    retrievedExercise.Muscle.Should().Equal(exercise.Muscle);
-                                    retrievedExercise.Active.Should().Equal(exercise.Active);
-                                    retrievedExercise.Description.Should().Equal(exercise.Description);
-                                }
+                                        retrievedExercise.Should().Equal(exercise);
+                                        retrievedExercise.Name.Should().Equal(exercise.Name);
+                                        retrievedExercise.MuscleGroup.Should().Equal(exercise.MuscleGroup);
+                                        retrievedExercise.Muscle.Should().Equal(exercise.Muscle);
+                                        retrievedExercise.Active.Should().Equal(exercise.Active);
+                                        retrievedExercise.Description.Should().Equal(exercise.Description);
+                                    }
                             ).andIn(
-                            () =>
-                                {
-                                    exercise.Name += "Test";
-                                    exerciseRepo.Update(exercise);
+                                () =>
+                                    {
+                                        exercise.Name += "Test";
+                                        exerciseRepo.Update(exercise);
 
-                                    exerciseAfterUpdate = exerciseRepo.GetById(exercise.Id);
+                                        exerciseAfterUpdate = exerciseRepo.GetById(exercise.Id);
 
-                                    exerciseAfterUpdate.Should().Equal(exercise);
-                                    exerciseAfterUpdate.Name.Should().Not.Equal(retrievedExercise.Name);
-                                }).andIn(
+                                        exerciseAfterUpdate.Should().Equal(exercise);
+                                        exerciseAfterUpdate.Name.Should().Not.Equal(retrievedExercise.Name);
+                                    }
+                            ).andIn(
                                 () =>
                                     {
                                         exerciseRepo.Delete(exercise.Id);
@@ -53,6 +55,23 @@ namespace ØvelsesPlanTests
                                         deletedExercise.Should().Be.Null();
                                     });
 
+                       
+                        var server = MongoServer.Create("mongodb://localhost:27020");
+                        var database = server.GetDatabase("OevelsesPlan");
+                        
+                        "Be backed by a mongo db".asIn(
+                            () =>
+                                {
+                                    exercise = exerciseRepo.Add(inputExercise);
+
+                                    var exercisesCollectionFromMongo = database.GetCollection<Exercise>("exercises");
+                                    var exerciseRetrivedFromMonngo = exercisesCollectionFromMongo.Find(Query.EQ("_id", exercise.Id)).FirstOrDefault(); 
+
+                                    exerciseRetrivedFromMonngo.Should().Not.Be.Null();
+                                    exerciseRetrivedFromMonngo.Should().Equal(exercise);
+                                });
+
+                        server.Disconnect();
                     });
         }
 

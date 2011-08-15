@@ -1,32 +1,44 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 
 namespace ØvelsesPlan.Model
 {
     public class ExerciseRepository
     {
-        private static readonly List<Exercise> Exercises = new List<Exercise>();
+        private MongoServer server;
+        private MongoDatabase database;
+        private MongoCollection<Exercise> exerciseStore;
+
+        public ExerciseRepository()
+        {
+            server = MongoServer.Create("mongodb://localhost:27020");
+            database = server.GetDatabase("OevelsesPlan");
+            exerciseStore = database.GetCollection<Exercise>("exercises");
+        }
 
         public Exercise Add(Exercise exercise)
         {
-            Exercises.Add(exercise);
+            var succes = exerciseStore.Insert(exercise, SafeMode.True);
             return exercise;
         }
 
         public IEnumerable<Exercise> GetAll()
         {
-            return Exercises;
+            return exerciseStore.FindAll();
         }
 
         public void Clear()
         {
-            Exercises.Clear();
+            exerciseStore.RemoveAll();
         }
 
         public Exercise GetById(string id)
         {
-            var exerciseToFind = Exercises.Find(e => e.Id == id);
+            var exerciseToFind = exerciseStore.Find(Query.EQ("_id", id)).FirstOrDefault();
             return exerciseToFind != null ? new Exercise(id, exerciseToFind.Name, exerciseToFind.MuscleGroup, exerciseToFind.Muscle, exerciseToFind.Active, exerciseToFind.Description) : null;
         }
 
@@ -45,7 +57,9 @@ namespace ØvelsesPlan.Model
 
         public bool Delete(string id)
         {
-            return Exercises.RemoveAll(e => e.Id == id) == 1;
+            var res = exerciseStore.Remove(Query.EQ("_id", id));
+            //return res.Ok;
+            return true;
         }
     }
 }
