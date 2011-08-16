@@ -8,7 +8,7 @@ using ØvelsesPlan.Model;
 
 namespace ØvelsesPlanTests
 {
-    public class WeekPlanSpec
+    public class WeekPlanSpec : MongoIntegrationSpec
     {
         [Fact]
         public void when_database_is_empty()
