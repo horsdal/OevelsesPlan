@@ -13,10 +13,10 @@ namespace ØvelsesPlan.Model
         private MongoDatabase database;
         private MongoCollection<Exercise> exerciseStore;
 
-        public ExerciseRepository()
+        public ExerciseRepository(string connectionString, string databaseName)
         {
-            server = MongoServer.Create("mongodb://localhost:27020");
-            database = server.GetDatabase("OevelsesPlan");
+            server = MongoServer.Create(connectionString);
+            database = server.GetDatabase(databaseName);
             exerciseStore = database.GetCollection<Exercise>("exercises");
         }
 

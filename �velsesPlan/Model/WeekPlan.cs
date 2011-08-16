@@ -15,7 +15,7 @@ namespace ØvelsesPlan.Model
         {
             WeekNumber = weekNumber;
 
-            exercisesInPlan = new ExerciseRepository().GetAll().Shuffle().ToList();
+            exercisesInPlan = new ExerciseRepository("mongodb://localhost:27020", "OevelsesPlan").GetAll().Shuffle().ToList();
 
             CreatePlan();
         }

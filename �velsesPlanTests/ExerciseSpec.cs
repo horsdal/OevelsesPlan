@@ -9,7 +9,7 @@ using ØvelsesPlan.Model;
 
 namespace ØvelsesPlanTests
 {
-    public class ExerciseSpec
+    public class ExerciseSpec : MongoIntegrationSpec
     {
         [Theory, AutoData]
         public void CRUDTest(Exercise inputExercise)
@@ -17,7 +17,7 @@ namespace ØvelsesPlanTests
             "The exercise data store".should(
                 () =>
                     {
-                        var exerciseRepo = new ExerciseRepository();
+                        var exerciseRepo = new ExerciseRepository("mongodb://localhost:27020", "OevelsesPlan");
                         Exercise exercise = null, retrievedExercise = null, exerciseAfterUpdate;
 
                         "Support all the CRUD operations on a single exercise".asIn(
@@ -55,13 +55,10 @@ namespace ØvelsesPlanTests
                                         deletedExercise.Should().Be.Null();
                                     });
 
-                       
-                        var server = MongoServer.Create("mongodb://localhost:27020");
-                        var database = server.GetDatabase("OevelsesPlan");
-                        
                         "Be backed by a mongo db".asIn(
                             () =>
                                 {
+                                    var database = mongoServer.GetDatabase("OevelsesPlan");
                                     exercise = exerciseRepo.Add(inputExercise);
 
                                     var exercisesCollectionFromMongo = database.GetCollection<Exercise>("exercises");
@@ -70,8 +67,6 @@ namespace ØvelsesPlanTests
                                     exerciseRetrivedFromMonngo.Should().Not.Be.Null();
                                     exerciseRetrivedFromMonngo.Should().Equal(exercise);
                                 });
-
-                        server.Disconnect();
                     });
         }
 
@@ -121,7 +116,7 @@ namespace ØvelsesPlanTests
             "Updating the exercise through the repository by column number".should(
                 () =>
                     {
-                        var exercises = new ExerciseRepository();
+                        var exercises = new ExerciseRepository("mongodb://localhost:27020", "OevelsesPlan");
                         exercises.Add(sut);
                         "update the name if the column number is 0".asIn(
                             () =>

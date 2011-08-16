@@ -6,7 +6,7 @@ namespace ØvelsesPlan
     public class ExercisePlannerModule : NancyModule
     {
         private readonly WeekPlanRepository weekPlans = new WeekPlanRepository();
-        private readonly ExerciseRepository exercises = new ExerciseRepository();
+        private readonly ExerciseRepository exercises = new ExerciseRepository("mongodb://localhost:27020", "OevelsesPlan");
 
         public ExercisePlannerModule()
         {
