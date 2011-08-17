@@ -17,7 +17,7 @@ namespace ØvelsesPlanTests
             "The exercise data store".should(
                 () =>
                     {
-                        var exerciseRepo = new ExerciseRepository("mongodb://localhost:27020", "OevelsesPlan");
+                        var exerciseRepo = new ExerciseRepository(mongoConnectionString, "OevelsesPlan");
                         Exercise exercise = null, retrievedExercise = null, exerciseAfterUpdate;
 
                         "Support all the CRUD operations on a single exercise".asIn(
@@ -116,7 +116,7 @@ namespace ØvelsesPlanTests
             "Updating the exercise through the repository by column number".should(
                 () =>
                     {
-                        var exercises = new ExerciseRepository("mongodb://localhost:27020", "OevelsesPlan");
+                        var exercises = new ExerciseRepository(mongoConnectionString, "OevelsesPlan");
                         exercises.Add(sut);
                         "update the name if the column number is 0".asIn(
                             () =>

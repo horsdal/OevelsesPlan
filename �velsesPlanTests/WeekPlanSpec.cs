@@ -13,7 +13,7 @@ namespace ØvelsesPlanTests
         [Fact]
         public void when_database_is_empty()
         {
-            new ExerciseRepository("mongodb://localhost:27020", "OevelsesPlan").Clear();
+            new ExerciseRepository(mongoConnectionString, "OevelsesPlan").Clear();
 
             "The current weekplan".should(
                 () =>
@@ -113,7 +113,7 @@ namespace ØvelsesPlanTests
 
         private void PrimeDatabaseWtih3ActiveExercises(int numberOfExercisesInDatabase)
         {
-            var exercises = new ExerciseRepository("mongodb://localhost:27020", "OevelsesPlan");
+            var exercises = new ExerciseRepository(mongoConnectionString, "OevelsesPlan");
             exercises.Clear();
             for (int i = 0; i < numberOfExercisesInDatabase; i++)
                 exercises.Add(new Exercise(name: "Hop" + i, muscleGroup: "Lår", muscle: "Quadrozeps pemoris", active: true, description: "Foo"));

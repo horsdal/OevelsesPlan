@@ -11,6 +11,7 @@ namespace ØvelsesPlanTests
         protected const int mongoPort = 27020;
         private readonly Process mongoProcess;
         protected MongoServer mongoServer;
+        protected readonly string mongoConnectionString;
 
         public MongoIntegrationSpec()
         {
@@ -20,6 +21,7 @@ namespace ØvelsesPlanTests
             mongoProcess = Process.Start(mongoStartupCommand);
 
             mongoServer = MongoServer.Create("mongodb://localhost:27020");
+            mongoConnectionString = "mongodb://localhost:" + mongoPort;
         }
 
         public void Dispose()
