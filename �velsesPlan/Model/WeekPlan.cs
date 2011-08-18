@@ -74,31 +74,5 @@ namespace ØvelsesPlan.Model
         {
             return GetEnumerator();
         }
-
-        // override object.Equals
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof (WeekPlan)) return false;
-            return Equals((WeekPlan) obj);
-        }
-
-        public bool Equals(WeekPlan other)
-        {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
-            return Equals(other.plan, plan) && other.WeekNumber == WeekNumber;
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                int result = (plan != null ? plan.GetHashCode() : 0);
-                result = (result*397) ^ WeekNumber;
-                return result;
-            }
-        }
     }
 }
