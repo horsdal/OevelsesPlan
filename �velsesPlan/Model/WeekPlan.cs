@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using MongoDB.Bson;
 using ØvelsesPlan.Helpers;
 
 namespace ØvelsesPlan.Model
@@ -11,11 +12,15 @@ namespace ØvelsesPlan.Model
         private readonly List<WeekPlanEntry> plan = new List<WeekPlanEntry>();
         private readonly List<Exercise> exercisesInPlan;
 
-        public WeekPlan(int weekNumber)
+        public int WeekNumber { get; private set; }
+        public ObjectId Id { get; private set; }
+
+        public WeekPlan(int weekNumber, IEnumerable<Exercise> exercisesToInclude)
         {
             WeekNumber = weekNumber;
+            Id = new ObjectId();
 
-            exercisesInPlan = new ExerciseRepository("mongodb://localhost:27020", "OevelsesPlan").GetAll().Shuffle().ToList();
+            exercisesInPlan = exercisesToInclude.Shuffle().ToList();
 
             CreatePlan();
         }
@@ -54,7 +59,6 @@ namespace ØvelsesPlan.Model
             return exercisesInPlan.GetRange(startIndex, exercisesPerDay);
         }
 
-        public int WeekNumber { get; private set; }
 
         public IEnumerator<WeekPlanEntry> GetEnumerator()
         {
@@ -69,6 +73,32 @@ namespace ØvelsesPlan.Model
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        // override object.Equals
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != typeof (WeekPlan)) return false;
+            return Equals((WeekPlan) obj);
+        }
+
+        public bool Equals(WeekPlan other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return Equals(other.plan, plan) && other.WeekNumber == WeekNumber;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int result = (plan != null ? plan.GetHashCode() : 0);
+                result = (result*397) ^ WeekNumber;
+                return result;
+            }
         }
     }
 }

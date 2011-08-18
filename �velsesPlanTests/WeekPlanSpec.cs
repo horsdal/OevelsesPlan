@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using MongoDB.Driver.Builders;
+using Ploeh.AutoFixture.Xunit;
 using Xunit;
 using Specs;
 using Should.Fluent;
@@ -13,12 +15,13 @@ namespace ØvelsesPlanTests
         [Fact]
         public void when_database_is_empty()
         {
-            new ExerciseRepository(mongoConnectionString, "OevelsesPlan").Clear();
+            var exercises = new ExerciseRepository(mongoConnectionString, "OevelsesPlan");
+            exercises.Clear();
 
             "The current weekplan".should(
                 () =>
                     {
-                        var currentWeekPlan = new WeekPlanRepository().GetCurrentWeekPlan();
+                        var currentWeekPlan = new WeekPlanRepository(mongoConnectionString, "OevelsesPlan", exercises).GetCurrentWeekPlan();
 
                         "be for the current week".asIn
                             (
@@ -37,7 +40,7 @@ namespace ØvelsesPlanTests
         public void when_database_has_only_active_exercises(int numberOfExercisesInDatabase)
         {
             PrimeDatabaseWtih3ActiveExercises(numberOfExercisesInDatabase);
-            var weekPlanRepository = new WeekPlanRepository();
+            var weekPlanRepository = new WeekPlanRepository(mongoConnectionString, "OevelsesPlan", new ExerciseRepository(mongoConnectionString, "OevelsesPlan"));
             var currentWeekPlan = weekPlanRepository.GetCurrentWeekPlan();
 
             "The current weekplan".should(
@@ -109,6 +112,26 @@ namespace ØvelsesPlanTests
                                     }
                                 });
                     });
+        }
+
+        [Theory, AutoData]
+        public void the_weekplan_repository(int weekNumber)
+        {
+            var weekplanRepo = new WeekPlanRepository(mongoConnectionString, "OevelsesPlan", new ExerciseRepository(mongoConnectionString, "OevelsesPlan"));
+
+            "Be backed by a mongo db".asIn(
+                            () =>
+                            {
+                                var database = mongoServer.GetDatabase("OevelsesPlan");
+                                var weekplan = weekplanRepo.CreateWeekPlanFor(weekNumber);
+
+                                var weekplanCollectionFromMongo = database.GetCollection("weekplans");
+                                var weekplanRetrivedFromMonngo = weekplanCollectionFromMongo.Find(Query.EQ("WeekNumber", weekplan.WeekNumber)).FirstOrDefault();
+
+                                weekplanRetrivedFromMonngo.Should().Not.Be.Null();
+                                weekplanRetrivedFromMonngo["WeekNumber"].AsInt32.Should().Equal(weekNumber);
+                                weekplanRetrivedFromMonngo["entries"].AsBsonArray.Should().Count.Exactly(weekplan.Count());
+                            });
         }
 
         private void PrimeDatabaseWtih3ActiveExercises(int numberOfExercisesInDatabase)

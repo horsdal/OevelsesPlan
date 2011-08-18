@@ -5,11 +5,16 @@ namespace ØvelsesPlan
 {
     public class ExercisePlannerModule : NancyModule
     {
-        private readonly WeekPlanRepository weekPlans = new WeekPlanRepository();
-        private readonly ExerciseRepository exercises = new ExerciseRepository("mongodb://localhost:27020", "OevelsesPlan");
+        private const string connectionString = "mongodb://localhost:27020";
+        private const string databaseName = "OevelsesPlan";
+        private readonly ExerciseRepository exercises;
+        private readonly WeekPlanRepository weekPlans;
 
         public ExercisePlannerModule()
         {
+            exercises = new ExerciseRepository(connectionString, databaseName);
+            weekPlans = new WeekPlanRepository(connectionString, databaseName, exercises);
+
             Get["/"] = _ => View["Index.htm"];
            
             Get["exercises/"] = _ => View["Exercises.htm"];
@@ -18,7 +23,7 @@ namespace ØvelsesPlan
             Post["exercises/delete"] = _ => exercises.Delete(Request.Form.row_id.Value) ? HttpStatusCode.OK : HttpStatusCode.NotModified;
             Post["exercises/edit/"] = _ => EditExerciseProperty();
 
-            Get["weekplan/current"] = _ => Response.AsJson(new { aaData = new WeekPlanRepository().GetCurrentWeekPlan().Flatten() });
+            Get["weekplan/current"] = _ => Response.AsJson(new { aaData = weekPlans.GetCurrentWeekPlan().Flatten() });
             Post["weekplan/create"] = _ => Response.AsJson(new { aaData = weekPlans.CreateWeekPlanFor(DanishClaendar.CurrentWeek).Flatten() });
         }
 
