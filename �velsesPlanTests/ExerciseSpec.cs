@@ -12,15 +12,15 @@ namespace ØvelsesPlanTests
     public class ExerciseSpec : MongoIntegrationSpec
     {
         [Theory, AutoData]
-        public void CRUDTest(Exercise inputExercise)
+        public void given_a_database(Exercise inputExercise)
         {
-            "The exercise data store".should(
+            "The exercise repository".should(
                 () =>
                     {
                         var exerciseRepo = new ExerciseRepository(mongoConnectionString, "OevelsesPlan");
                         Exercise exercise = null, retrievedExercise = null, exerciseAfterUpdate;
 
-                        "Support all the CRUD operations on a single exercise".asIn(
+                        "support all the CRUD operations on a single exercise".asIn(
                             () => exercise = exerciseRepo.Add(inputExercise)
                             ).andIn(
                                 () =>
@@ -71,7 +71,7 @@ namespace ØvelsesPlanTests
         }
 
         [Theory, AutoData]
-        public void GivenAnExercise(Exercise sut)
+        public void given_an_exercise(Exercise sut)
         {
             var originalId = sut.Id;
             "Updating the exercise directly by column number".should(
