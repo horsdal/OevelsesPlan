@@ -41,12 +41,8 @@ namespace ØvelsesPlan.Model
 
         public override bool Equals(object obj)
         {
-
-            if (obj == null || GetType() != obj.GetType())
-                return false;
-
             var rhs = obj as Exercise;
-            return this.Id == rhs.Id && this.Name == rhs.Name && this.MuscleGroup == rhs.MuscleGroup &&
+            return rhs != null && this.Id == rhs.Id && this.Name == rhs.Name && this.MuscleGroup == rhs.MuscleGroup &&
                    this.Muscle == rhs.Muscle && this.Active == rhs.Active && this.Description == rhs.Description;
         }
 

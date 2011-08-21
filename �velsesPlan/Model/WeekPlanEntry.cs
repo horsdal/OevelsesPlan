@@ -16,11 +16,8 @@ namespace ØvelsesPlan.Model
 
         public override bool Equals(object obj)
         {
-            if (obj == null || GetType() != obj.GetType())
-                return false;
-
             var rhs = obj as WeekPlanEntry;
-            return this.Exercise.Name == rhs.Exercise.Name && this.Day == rhs.Day;
+            return rhs != null && this.Exercise.Name == rhs.Exercise.Name && this.Day == rhs.Day;
         }
 
         public string[] Flatten()
