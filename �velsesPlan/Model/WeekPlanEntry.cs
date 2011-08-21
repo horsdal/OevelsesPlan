@@ -28,7 +28,8 @@ namespace ØvelsesPlan.Model
             return new[]
                        {
                            DanishClaendar.WeekDayNameFor(Day),
-                           Exercise.Name
+                           Exercise.Name,
+                           Exercise.Description
                        };
         }
     }
