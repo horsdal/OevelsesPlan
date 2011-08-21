@@ -13,12 +13,16 @@ namespace ØvelsesPlan.Model
         private readonly List<Exercise> exercisesInPlan;
 
         public int WeekNumber { get; private set; }
-        public ObjectId Id { get; private set; }
+
+        public WeekPlan(int weekNumber, IEnumerable<WeekPlanEntry> entries)
+        {
+            WeekNumber = weekNumber;
+            plan.AddRange(entries);
+        }
 
         public WeekPlan(int weekNumber, IEnumerable<Exercise> exercisesToInclude)
         {
             WeekNumber = weekNumber;
-            Id = new ObjectId();
 
             exercisesInPlan = exercisesToInclude.Shuffle().ToList();
 

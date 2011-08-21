@@ -23,7 +23,7 @@ namespace ØvelsesPlan
             Post["exercises/delete"] = _ => exercises.Delete(Request.Form.row_id.Value) ? HttpStatusCode.OK : HttpStatusCode.NotModified;
             Post["exercises/edit/"] = _ => EditExerciseProperty();
 
-            Get["weekplan/current"] = _ => Response.AsJson(new { aaData = weekPlans.GetCurrentWeekPlan().Flatten() });
+            Get["weekplan/current"] = _ => Response.AsJson(new { aaData = weekPlans.GetWeekPlanFor(DanishClaendar.CurrentWeek).Flatten() });
             Post["weekplan/create"] = _ => Response.AsJson(new { aaData = weekPlans.CreateWeekPlanFor(DanishClaendar.CurrentWeek).Flatten() });
         }
 

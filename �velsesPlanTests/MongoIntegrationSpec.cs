@@ -12,6 +12,7 @@ namespace ØvelsesPlanTests
         private readonly Process mongoProcess;
         protected MongoServer mongoServer;
         protected readonly string mongoConnectionString;
+        protected string databaseName = "OevelsesPlan";
 
         public MongoIntegrationSpec()
         {
@@ -22,13 +23,15 @@ namespace ØvelsesPlanTests
 
             mongoServer = MongoServer.Create("mongodb://localhost:27020");
             mongoConnectionString = "mongodb://localhost:" + mongoPort;
+
+            mongoServer.DropDatabase(databaseName);
         }
 
         public void Dispose()
         {
-            mongoProcess.CloseMainWindow();
-
             mongoServer.Disconnect();
+            if (!mongoProcess.HasExited)
+                mongoProcess.CloseMainWindow();
         }
     }
 }
