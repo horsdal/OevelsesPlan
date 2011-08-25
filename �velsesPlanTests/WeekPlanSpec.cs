@@ -21,7 +21,7 @@ namespace ØvelsesPlanTests
             "The current weekplan".should(
                 () =>
                     {
-                        var currentWeekPlan = new WeekPlanRepository(mongoConnectionString, databaseName, exercises).GetWeekPlanFor(DanishClaendar.CurrentWeek);
+                        var currentWeekPlan = new WeekPlanRepository(mongoConnectionString, exercises).GetWeekPlanFor(DanishClaendar.CurrentWeek);
 
                         "be for the current week".asIn
                             (
@@ -41,7 +41,7 @@ namespace ØvelsesPlanTests
         public void when_database_has_only_active_exercises(int numberOfExercisesInDatabase)
         {
             PrimeDatabaseWtih3ActiveExercises(numberOfExercisesInDatabase);
-            var weekPlanRepository = new WeekPlanRepository(mongoConnectionString, databaseName, new ExerciseRepository(mongoConnectionString));
+            var weekPlanRepository = new WeekPlanRepository(mongoConnectionString, new ExerciseRepository(mongoConnectionString));
             var currentWeekPlan = weekPlanRepository.GetWeekPlanFor(DanishClaendar.CurrentWeek);
 
             "The current weekplan".should(
@@ -125,7 +125,7 @@ namespace ØvelsesPlanTests
         [Theory, AutoData]
         public void the_weekplan_repository(int weekNumber)
         {
-            var weekplanRepo = new WeekPlanRepository(mongoConnectionString, databaseName, new ExerciseRepository(mongoConnectionString));
+            var weekplanRepo = new WeekPlanRepository(mongoConnectionString, new ExerciseRepository(mongoConnectionString));
 
             "Be backed by a mongo db".asIn(
                             () =>

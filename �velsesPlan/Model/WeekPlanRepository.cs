@@ -15,15 +15,13 @@ namespace ØvelsesPlan.Model
             public WeekPlanEntry[] entries;
         }
 
-        private MongoServer server;
         private MongoDatabase database;
         private MongoCollection<RawWeekPlan> weekplanStore;
         private readonly ExerciseRepository exerciseRepository;
 
-        public WeekPlanRepository(string connectionString, string databaseName, ExerciseRepository exerciseRepository)
+        public WeekPlanRepository(string connectionString, ExerciseRepository exerciseRepository)
         {
-            server = MongoServer.Create(connectionString);
-            database = server.GetDatabase(databaseName);
+            database = MongoDatabase.Create(connectionString);
             weekplanStore = database.GetCollection<RawWeekPlan>("weekplans");
             this.exerciseRepository = exerciseRepository;
         }
