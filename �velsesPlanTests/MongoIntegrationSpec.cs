@@ -22,7 +22,7 @@ namespace ØvelsesPlanTests
             mongoProcess = Process.Start(mongoStartupCommand);
 
             mongoServer = MongoServer.Create("mongodb://localhost:27020");
-            mongoConnectionString = "mongodb://localhost:" + mongoPort;
+            mongoConnectionString = "mongodb://localhost:" + mongoPort + "/" + databaseName;
 
             mongoServer.DropDatabase(databaseName);
         }
