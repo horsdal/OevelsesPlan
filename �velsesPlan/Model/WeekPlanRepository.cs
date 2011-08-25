@@ -10,7 +10,7 @@ namespace ØvelsesPlan.Model
     {
         private class RawWeekPlan
         {
-            public ObjectId id = ObjectId.GenerateNewId();
+            public ObjectId id;
             public int weekNumber;
             public WeekPlanEntry[] entries;
         }
@@ -29,12 +29,18 @@ namespace ØvelsesPlan.Model
         public WeekPlan CreateWeekPlanFor(int week)
         {
             var weekplan = new WeekPlan(week, exerciseRepository.GetAll());
-            var rawWeekPlan = new RawWeekPlan {weekNumber = week, entries = weekplan.ToArray()};
+            var rawWeekPlan = new RawWeekPlan {id = CreateObjectId(week),  weekNumber = week, entries = weekplan.ToArray()};
             weekplanStore.Update(
                 Query.EQ("weekNumber", week),
                 Update.Replace(rawWeekPlan),
                 UpdateFlags.Upsert);
             return weekplan;
+        }
+
+        private ObjectId CreateObjectId(int week)
+        {
+            return new ObjectId(
+                new byte[] {0,0,0,0,0,0,0,0,0,0, (byte) (week / 10),(byte) (week % 10) });
         }
 
         public WeekPlan GetWeekPlanFor(int week)
