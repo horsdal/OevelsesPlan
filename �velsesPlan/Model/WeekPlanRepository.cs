@@ -39,7 +39,7 @@ namespace ØvelsesPlan.Model
 
         public WeekPlan GetWeekPlanFor(int week)
         {
-            var rawWeekPlan = weekplanStore.Find(Query.EQ("weekNumber", week)).FirstOrDefault();
+             var rawWeekPlan = weekplanStore.Find(Query.EQ("weekNumber", week)).FirstOrDefault();
             return rawWeekPlan != null
                        ? new WeekPlan(rawWeekPlan.weekNumber, rawWeekPlan.entries)
                        : CreateWeekPlanFor(week);
