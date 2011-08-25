@@ -15,7 +15,7 @@ namespace ØvelsesPlanTests
         [Fact]
         public void when_database_is_empty()
         {
-            var exercises = new ExerciseRepository(mongoConnectionString, databaseName);
+            var exercises = new ExerciseRepository(mongoConnectionString);
             exercises.Clear();
 
             "The current weekplan".should(
@@ -41,7 +41,7 @@ namespace ØvelsesPlanTests
         public void when_database_has_only_active_exercises(int numberOfExercisesInDatabase)
         {
             PrimeDatabaseWtih3ActiveExercises(numberOfExercisesInDatabase);
-            var weekPlanRepository = new WeekPlanRepository(mongoConnectionString, databaseName, new ExerciseRepository(mongoConnectionString, databaseName));
+            var weekPlanRepository = new WeekPlanRepository(mongoConnectionString, databaseName, new ExerciseRepository(mongoConnectionString));
             var currentWeekPlan = weekPlanRepository.GetWeekPlanFor(DanishClaendar.CurrentWeek);
 
             "The current weekplan".should(
@@ -125,7 +125,7 @@ namespace ØvelsesPlanTests
         [Theory, AutoData]
         public void the_weekplan_repository(int weekNumber)
         {
-            var weekplanRepo = new WeekPlanRepository(mongoConnectionString, databaseName, new ExerciseRepository(mongoConnectionString, databaseName));
+            var weekplanRepo = new WeekPlanRepository(mongoConnectionString, databaseName, new ExerciseRepository(mongoConnectionString));
 
             "Be backed by a mongo db".asIn(
                             () =>
@@ -144,7 +144,7 @@ namespace ØvelsesPlanTests
 
         private void PrimeDatabaseWtih3ActiveExercises(int numberOfExercisesInDatabase)
         {
-            var exercises = new ExerciseRepository(mongoConnectionString, databaseName);
+            var exercises = new ExerciseRepository(mongoConnectionString);
             exercises.Clear();
             for (int i = 0; i < numberOfExercisesInDatabase; i++)
                 exercises.Add(new Exercise(name: "Hop" + i, muscleGroup: "Lår", muscle: "Quadrozeps pemoris", active: true, description: "Foo"));

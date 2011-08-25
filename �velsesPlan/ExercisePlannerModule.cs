@@ -15,7 +15,7 @@ namespace ØvelsesPlan
         {
             connectionString = ConfigurationManager.AppSettings.Get("MONGOHQ_URL");
 
-            exercises = new ExerciseRepository(connectionString, databaseName);
+            exercises = new ExerciseRepository(connectionString);
             weekPlans = new WeekPlanRepository(connectionString, databaseName, exercises);
 
             Get["/"] = _ => View["Index.htm"];

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
@@ -9,14 +7,12 @@ namespace ØvelsesPlan.Model
 {
     public class ExerciseRepository
     {
-        private MongoServer server;
         private MongoDatabase database;
         private MongoCollection<Exercise> exerciseStore;
 
-        public ExerciseRepository(string connectionString, string databaseName)
+        public ExerciseRepository(string connectionString)
         {
-            server = MongoServer.Create(connectionString);
-            database = server.GetDatabase(databaseName);
+           database = MongoDatabase.Create(connectionString);
             exerciseStore = database.GetCollection<Exercise>("exercises");
         }
 
