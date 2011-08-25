@@ -1,17 +1,20 @@
-﻿using Nancy;
+﻿using System.Configuration;
+using Nancy;
 using ØvelsesPlan.Model;
 
 namespace ØvelsesPlan
 {
     public class ExercisePlannerModule : NancyModule
     {
-        private const string connectionString = "mongodb://localhost:27020";
+        private readonly string connectionString;
         private const string databaseName = "OevelsesPlan";
         private readonly ExerciseRepository exercises;
         private readonly WeekPlanRepository weekPlans;
 
         public ExercisePlannerModule()
         {
+            connectionString = ConfigurationManager.AppSettings.Get("MONGOHQ_URL");
+
             exercises = new ExerciseRepository(connectionString, databaseName);
             weekPlans = new WeekPlanRepository(connectionString, databaseName, exercises);
 
