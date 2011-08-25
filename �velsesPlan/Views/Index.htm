@@ -13,21 +13,47 @@
 
 		<script type="text/javascript" charset="utf-8">
 		    $(document).ready(function () {
-		        var oTable = $('#exercises').dataTable({
-		            "bProcessing": true,
-		            "sAjaxSource": "weekplan/current",
-		            "bSort": false
-		        });
-
-		        /* Add a click handler for the delete row */
-		        $('#new_plan_for_week').click(function () {
-		            event.preventDefault();
-		            $.post("weekplan/create", { weeknumber: "current" },
-                        function (data) {
-                            oTable.fnClearTable(false);
-                            oTable.fnAddData(data.aaData);
+		        $.get('weekplan/current',
+                    function (data) {
+                        var viewModel = data;
+                        var oTable = $('#exercises').dataTable({
+                            "bProcessing": true,
+                            "aaData": viewModel.aaData,
+                            /*"sAjaxSource": "weekplan/current",*/
+                            "bSort": false
                         });
-		        });
+
+                        $("#weekplan_header").html("Uge " + viewModel.weekNumber);
+
+                        $("#previous_week").click(function () {
+                            event.preventDefault();
+                            $.get("weekplan/" + (viewModel.weekNumber - 1),
+                                resetDataForDataTable
+                                );
+                        });
+
+                        $("#next_week").click(function () {
+                            event.preventDefault();
+                            $.get("weekplan/" + (viewModel.weekNumber + 1),
+                                resetDataForDataTable
+                                );
+                        });
+
+                        $('#new_plan_for_week').click(function () {
+                            event.preventDefault();
+                            $.post("weekplan/create",
+                                { weeknumber: viewModel.weekNumber },
+                                resetDataForDataTable
+                            );
+                        });
+
+                        function resetDataForDataTable(data) {
+                            viewModel = data;
+                            $("#weekplan_header").html("Uge " + viewModel.weekNumber);
+                            oTable.fnClearTable(false);
+                            oTable.fnAddData(viewModel.aaData);
+                        }
+                    });
 		    });
 
 		</script>
@@ -37,7 +63,7 @@
     <div class="full_width big">
 				Øvelsesplanlægger
 			</div>
-    <h1>Øvelser</h1>
+    <h1 id="weekplan_header">Øvelser, uge </h1>
     <div id="dynamic">
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="exercises">
 	<thead>

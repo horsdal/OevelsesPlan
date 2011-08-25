@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using Nancy;
 using ØvelsesPlan.Model;
 
@@ -7,7 +8,6 @@ namespace ØvelsesPlan
     public class ExercisePlannerModule : NancyModule
     {
         private readonly string connectionString;
-        private const string databaseName = "OevelsesPlan";
         private readonly ExerciseRepository exercises;
         private readonly WeekPlanRepository weekPlans;
 
@@ -26,8 +26,19 @@ namespace ØvelsesPlan
             Post["exercises/delete"] = _ => exercises.Delete(Request.Form.row_id.Value) ? HttpStatusCode.OK : HttpStatusCode.NotModified;
             Post["exercises/edit/"] = _ => EditExerciseProperty();
 
-            Get["weekplan/current"] = _ => Response.AsJson(new { aaData = weekPlans.GetWeekPlanFor(DanishClaendar.CurrentWeek).Flatten() });
+            Get["weekplan/current"] = _ => GetWeekPlanFor(DanishClaendar.CurrentWeek);
+            Get[@"weekplan/(?<weeknumber>[\d]{1,2})"] = _ => GetWeekPlanFor(_.weeknumber);
             Post["weekplan/create"] = _ => Response.AsJson(new { aaData = weekPlans.CreateWeekPlanFor(DanishClaendar.CurrentWeek).Flatten() });
+        }
+
+        private Response GetWeekPlanFor(int weekNumber)
+        {
+            return Response.AsJson(
+                new
+                    {
+                        weekNumber = weekNumber,
+                        aaData = weekPlans.GetWeekPlanFor(weekNumber).Flatten()
+                    });
         }
 
         private Response EditExerciseProperty()
