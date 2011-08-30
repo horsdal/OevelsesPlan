@@ -12,10 +12,17 @@ namespace ØvelsesPlanTests
 {
     public class WeekPlanSpec : MongoIntegrationSpec
     {
+        private ExerciseRepository exerciseRepository;
+
+        public WeekPlanSpec()
+        {
+            exerciseRepository = new ExerciseRepository(mongoConnectionString);
+        }
+
         [Fact]
         public void when_database_is_empty()
         {
-            var exercises = new ExerciseRepository(mongoConnectionString);
+            var exercises = exerciseRepository;
             exercises.Clear();
 
             "The current weekplan".should(
@@ -40,8 +47,9 @@ namespace ØvelsesPlanTests
         InlineData(42)]
         public void when_database_has_only_active_exercises(int numberOfExercisesInDatabase)
         {
-            PrimeDatabaseWtih3ActiveExercises(numberOfExercisesInDatabase);
-            var weekPlanRepository = new WeekPlanRepository(mongoConnectionString, new ExerciseRepository(mongoConnectionString));
+            exerciseRepository.Clear();
+            PrimeDatabaseWtihActiveExercises(numberOfExercisesInDatabase);
+            var weekPlanRepository = new WeekPlanRepository(mongoConnectionString, exerciseRepository);
             var currentWeekPlan = weekPlanRepository.GetWeekPlanFor(DanishClaendar.CurrentWeek);
 
             "The current weekplan".should(
@@ -123,9 +131,34 @@ namespace ØvelsesPlanTests
         }
 
         [Theory, AutoData]
+        public void when_database_has_active_and_inactive_exercises(int numberOfActiveExercises, int numberOfInactiveExercises)
+        {
+            exerciseRepository.Clear();
+            PrimeDatabaseWtihActiveExercises(numberOfActiveExercises);
+            PrimeDatabaseWtihInactiveExercises(numberOfInactiveExercises);
+
+            var weekPlanRepository = new WeekPlanRepository(mongoConnectionString,
+                                                            exerciseRepository);
+            var currentWeekPlan = weekPlanRepository.GetWeekPlanFor(DanishClaendar.CurrentWeek);
+
+            "The current weekplan".should(
+                () =>
+                    {
+                        "contain only active exercies".asIn(
+                            () =>
+                            currentWeekPlan.All(e => e.Exercise.Active).Should().Be.True());
+
+                        "contain all the active exercises from input".asIn(
+                            () =>
+                            currentWeekPlan.Should().Count.Exactly(numberOfActiveExercises));
+                    }
+                );
+        }
+
+        [Theory, AutoData]
         public void the_weekplan_repository(int weekNumber)
         {
-            var weekplanRepo = new WeekPlanRepository(mongoConnectionString, new ExerciseRepository(mongoConnectionString));
+            var weekplanRepo = new WeekPlanRepository(mongoConnectionString, exerciseRepository);
 
             "Be backed by a mongo db".asIn(
                             () =>
@@ -142,12 +175,21 @@ namespace ØvelsesPlanTests
                             });
         }
 
-        private void PrimeDatabaseWtih3ActiveExercises(int numberOfExercisesInDatabase)
+        private void PrimeDatabaseWtihActiveExercises(int count)
         {
-            var exercises = new ExerciseRepository(mongoConnectionString);
-            exercises.Clear();
-            for (int i = 0; i < numberOfExercisesInDatabase; i++)
-                exercises.Add(new Exercise(name: "Hop" + i, muscleGroup: "Lår", muscle: "Quadrozeps pemoris", active: true, description: "Foo"));
+            PrimeWithExercises(count, true);
+        }
+
+        private void PrimeDatabaseWtihInactiveExercises(int count)
+        {
+            PrimeWithExercises(count, false);
+        }
+
+        private void PrimeWithExercises(int count, bool active)
+        {
+            var exercises = exerciseRepository;
+            for (int i = 0; i < count; i++)
+                exercises.Add(new Exercise(name: "Hop" + i, muscleGroup: "Lår", muscle: "Quadrozeps pemoris", active: active, description: "Foo"));
         }
     }
 }

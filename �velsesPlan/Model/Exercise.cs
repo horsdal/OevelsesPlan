@@ -9,8 +9,8 @@ namespace ØvelsesPlan.Model
             Name = 0,
             MuscleGroup,
             Muscle,
-            ActiveText,
-            Description
+            Description,
+            ActiveText
         }
 
         private static int id = 0;

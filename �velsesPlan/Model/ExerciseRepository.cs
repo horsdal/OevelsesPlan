@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
@@ -56,6 +57,11 @@ namespace ØvelsesPlan.Model
             var res = exerciseStore.Remove(Query.EQ("_id", id));
             //return res.Ok;
             return true;
+        }
+
+        public IEnumerable<Exercise> GetAllActive()
+        {
+            return exerciseStore.Find(Query.EQ("Active", true));
         }
     }
 }

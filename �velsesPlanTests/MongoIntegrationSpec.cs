@@ -18,7 +18,7 @@ namespace ØvelsesPlanTests
         {
             const string dataPath = "oevelsesplantest";
             Directory.CreateDirectory(dataPath);
-            var mongoStartupCommand = new ProcessStartInfo("mongod.exe", string.Format("--dbpath {0} --port {1}", dataPath, mongoPort));
+            var mongoStartupCommand = new ProcessStartInfo("cmd.exe", string.Format("/C mongod.exe --dbpath {0} --port {1}", dataPath, mongoPort));
             mongoProcess = Process.Start(mongoStartupCommand);
 
             mongoServer = MongoServer.Create("mongodb://localhost:27020");

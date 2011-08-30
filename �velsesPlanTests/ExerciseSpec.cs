@@ -12,8 +12,11 @@ namespace ØvelsesPlanTests
     public class ExerciseSpec : MongoIntegrationSpec
     {
         [Theory, AutoData]
-        public void given_a_database(Exercise inputExercise)
+        public void given_a_database(Exercise inputExercise, Exercise[] activeExercises, Exercise[] inactiveExercises)
         {
+            foreach (var e in activeExercises)
+                e.Active = true;
+
             "The exercise repository".should(
                 () =>
                     {
@@ -54,6 +57,17 @@ namespace ØvelsesPlanTests
 
                                         deletedExercise.Should().Be.Null();
                                     });
+
+                        "Be able to return only the active exercises".asIn(
+                            () =>
+                                {
+                                    foreach (var e in activeExercises)
+                                        exerciseRepo.Add(e);
+                                    foreach (var e in inactiveExercises)
+                                        exerciseRepo.Add(e);
+                                    var activeExercisesFromRepo = exerciseRepo.GetAllActive();
+                                    activeExercisesFromRepo.SequenceEqual(activeExercises).Should().Be.True();
+                                });
 
                         "Be backed by a mongo db".asIn(
                             () =>

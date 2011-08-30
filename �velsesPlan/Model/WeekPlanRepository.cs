@@ -28,7 +28,7 @@ namespace ØvelsesPlan.Model
 
         public WeekPlan CreateWeekPlanFor(int week)
         {
-            var weekplan = new WeekPlan(week, exerciseRepository.GetAll());
+            var weekplan = new WeekPlan(week, exerciseRepository.GetAllActive());
             var rawWeekPlan = new RawWeekPlan {id = CreateObjectId(week),  weekNumber = week, entries = weekplan.ToArray()};
             weekplanStore.Update(
                 Query.EQ("weekNumber", week),
