@@ -13,10 +13,8 @@ namespace ØvelsesPlan.Model
             ActiveText
         }
 
-        private static int id = 0;
-
-        public Exercise(string name, string muscleGroup, string muscle, bool active, string description)
-            : this((++id).ToString(), name,muscleGroup, muscle, active, description)
+      public Exercise(string name, string muscleGroup, string muscle, bool active, string description)
+            : this(new Guid().ToString(), name,muscleGroup, muscle, active, description)
         {
         }
 

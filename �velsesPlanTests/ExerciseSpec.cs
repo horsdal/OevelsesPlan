@@ -175,6 +175,20 @@ namespace ØvelsesPlanTests
                                 });
                     });
 
+            "Its id".should(
+                () =>
+                    {
+                        "be long".asIn(() => originalId.Length.Should().Be.InRange(30, 100));
+                        "differ from a vanilla exercises id".asIn(
+                            () =>
+                                {
+                                    var vanillaExercise = new Exercise("", "", "", true, "");
+                                    vanillaExercise.Id.Length.Should().Be.InRange(30, 100);
+                                    originalId.Should().Not.Equal(vanillaExercise.Id);
+                                });
+                    });
+                        
+
             "The DT_RowId".should(
                 () => "be a serialization of the Id".asIn(
                     () => sut.DT_RowId.Should().Equal(originalId.ToString())
