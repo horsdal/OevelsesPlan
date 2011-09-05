@@ -14,7 +14,7 @@ namespace ØvelsesPlan.Model
         }
 
       public Exercise(string name, string muscleGroup, string muscle, bool active, string description)
-            : this(new Guid().ToString(), name,muscleGroup, muscle, active, description)
+            : this(Guid.NewGuid().ToString(), name,muscleGroup, muscle, active, description)
         {
         }
 
