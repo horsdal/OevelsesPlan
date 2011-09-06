@@ -401,14 +401,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccess\MongoExerciseRepository.cs" />
+    <Compile Include="DataAccess\MongoWeekPlanRepository.cs" />
     <Compile Include="ExercisePlannerModule.cs" />
     <Compile Include="Helpers\ListHelpers.cs" />
     <Compile Include="Model\Exercise.cs" />
     <Compile Include="Model\ExerciseRepository.cs" />
     <Compile Include="Model\WeekPlan.cs" />
     <Compile Include="Model\WeekPlanEntry.cs" />
-    <Compile Include="Model\WeekPlanRepository.cs" />
     <Compile Include="Model\DanishClaendar.cs" />
+    <Compile Include="Model\WeekPlanRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

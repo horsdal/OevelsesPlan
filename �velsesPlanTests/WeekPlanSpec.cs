@@ -29,7 +29,7 @@ namespace ØvelsesPlanTests
             "The current weekplan".should(
                 () =>
                     {
-                        var currentWeekPlan = new WeekPlanRepository(mongoConnectionString, exercises).GetWeekPlanFor(DanishClaendar.CurrentWeek);
+                        var currentWeekPlan = new MongoWeekPlanRepository(mongoConnectionString, exercises).GetWeekPlanFor(DanishClaendar.CurrentWeek);
 
                         "be for the current week".asIn
                             (
@@ -50,7 +50,7 @@ namespace ØvelsesPlanTests
         {
             exerciseRepository.Clear();
             PrimeDatabaseWtihActiveExercises(numberOfExercisesInDatabase);
-            var weekPlanRepository = new WeekPlanRepository(mongoConnectionString, exerciseRepository);
+            var weekPlanRepository = new MongoWeekPlanRepository(mongoConnectionString, exerciseRepository);
             var currentWeekPlan = weekPlanRepository.GetWeekPlanFor(DanishClaendar.CurrentWeek);
 
             "The current weekplan".should(
@@ -138,7 +138,7 @@ namespace ØvelsesPlanTests
             PrimeDatabaseWtihActiveExercises(numberOfActiveExercises);
             PrimeDatabaseWtihInactiveExercises(numberOfInactiveExercises);
 
-            var weekPlanRepository = new WeekPlanRepository(mongoConnectionString,
+            var weekPlanRepository = new MongoWeekPlanRepository(mongoConnectionString,
                                                             exerciseRepository);
             var currentWeekPlan = weekPlanRepository.GetWeekPlanFor(DanishClaendar.CurrentWeek);
 
@@ -159,7 +159,7 @@ namespace ØvelsesPlanTests
         [Theory, AutoData]
         public void the_weekplan_repository(int weekNumber)
         {
-            var weekplanRepo = new WeekPlanRepository(mongoConnectionString, exerciseRepository);
+            var weekplanRepo = new MongoWeekPlanRepository(mongoConnectionString, exerciseRepository);
 
             "Be backed by a mongo db".asIn(
                             () =>

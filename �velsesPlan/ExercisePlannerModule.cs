@@ -10,14 +10,14 @@ namespace ØvelsesPlan
     {
         private readonly string connectionString;
         private readonly ExerciseRepository exercises;
-        private readonly WeekPlanRepository weekPlans;
+        private readonly MongoWeekPlanRepository weekPlans;
 
         public ExercisePlannerModule()
         {
             connectionString = ConfigurationManager.AppSettings.Get("MONGOHQ_URL");
 
             exercises = new MongoExerciseRepository(connectionString);
-            weekPlans = new WeekPlanRepository(connectionString, exercises);
+            weekPlans = new MongoWeekPlanRepository(connectionString, exercises);
 
             Get["/"] = _ => View["Index.htm"];
 
