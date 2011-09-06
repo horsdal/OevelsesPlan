@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using Nancy;
+using ØvelsesPlan.DataAccess;
 using ØvelsesPlan.Model;
 
 namespace ØvelsesPlan
@@ -15,7 +16,7 @@ namespace ØvelsesPlan
         {
             connectionString = ConfigurationManager.AppSettings.Get("MONGOHQ_URL");
 
-            exercises = new ExerciseRepository(connectionString);
+            exercises = new MongoExerciseRepository(connectionString);
             weekPlans = new WeekPlanRepository(connectionString, exercises);
 
             Get["/"] = _ => View["Index.htm"];

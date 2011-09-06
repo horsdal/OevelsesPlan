@@ -400,6 +400,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccess\MongoExerciseRepository.cs" />
     <Compile Include="ExercisePlannerModule.cs" />
     <Compile Include="Helpers\ListHelpers.cs" />
     <Compile Include="Model\Exercise.cs" />

@@ -6,6 +6,7 @@ using Xunit;
 using Specs;
 using Should.Fluent;
 using Xunit.Extensions;
+using ØvelsesPlan.DataAccess;
 using ØvelsesPlan.Model;
 
 namespace ØvelsesPlanTests
@@ -16,7 +17,7 @@ namespace ØvelsesPlanTests
 
         public WeekPlanSpec()
         {
-            exerciseRepository = new ExerciseRepository(mongoConnectionString);
+            exerciseRepository = new MongoExerciseRepository(mongoConnectionString);
         }
 
         [Fact]

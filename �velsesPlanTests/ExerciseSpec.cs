@@ -5,6 +5,7 @@ using Ploeh.AutoFixture.Xunit;
 using Should.Fluent;
 using Specs;
 using Xunit.Extensions;
+using ØvelsesPlan.DataAccess;
 using ØvelsesPlan.Model;
 
 namespace ØvelsesPlanTests
@@ -20,7 +21,7 @@ namespace ØvelsesPlanTests
             "The exercise repository".should(
                 () =>
                     {
-                        var exerciseRepo = new ExerciseRepository(mongoConnectionString);
+                        var exerciseRepo = new MongoExerciseRepository(mongoConnectionString);
                         Exercise exercise = null, retrievedExercise = null, exerciseAfterUpdate;
 
                         "support all the CRUD operations on a single exercise".asIn(
@@ -130,7 +131,7 @@ namespace ØvelsesPlanTests
             "Updating the exercise through the repository by column number".should(
                 () =>
                     {
-                        var exercises = new ExerciseRepository(mongoConnectionString);
+                        var exercises = new MongoExerciseRepository(mongoConnectionString);
                         exercises.Add(sut);
                         "update the name if the column number is 0".asIn(
                             () =>
