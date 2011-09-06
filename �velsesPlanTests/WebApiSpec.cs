@@ -1,4 +1,5 @@
-﻿using Nancy;
+﻿using System.IO;
+using Nancy;
 using Nancy.Testing;
 using Should.Fluent;
 using Xunit;
@@ -30,11 +31,7 @@ namespace ØvelsesPlanTests
                             (
                                 () => response.StatusCode.Should().Equal(HttpStatusCode.OK)
                             ).andIn(
-                                () =>
-                                    {
-                                        response.Body["title"].ShouldContain("Øvelsesplan");
-                                  //      response.Body["#exercises"].ShouldExistOnce();
-                                    })
+                                () => response.Body["title"].ShouldContain("Øvelsesplan"))
                 );
         }
 
@@ -49,11 +46,7 @@ namespace ØvelsesPlanTests
                         (
                             () => response.StatusCode.Should().Equal(HttpStatusCode.OK)
                         ).andIn(
-                            () =>
-                            {
-                                response.Body["title"].ShouldContain("Øvelser");
-                                //response.Body["#exercises"].ShouldExistOnce();
-                            })
+                            () => response.Body["title"].ShouldContain("Øvelser"))
                 );
         }
 
@@ -69,12 +62,51 @@ namespace ØvelsesPlanTests
                         (
                             () => response.StatusCode.Should().Equal(HttpStatusCode.OK)
                         ).andIn(
-                            () =>
-                                {
-                                    response.Context.Response.ContentType.Should().Contain("json");
-                                    //response.Body["#exercises"].ShouldExistOnce();
-                                });
+                            () => response.Context.Response.ContentType.Should().Contain("json"));
+
                     "have retrieved all exercises".asIn
+                        (
+                            () => Assert.True(true) //TDB  
+                        );
+                });
+        }
+
+        [Fact]
+        public void when_calling_weekplan_current()
+        {
+            var response = app.Get("/weekplan/current/", with => with.HttpRequest());
+
+            "the app".should
+                (() =>
+                {
+                    "return json".asIn
+                        (
+                            () => response.StatusCode.Should().Equal(HttpStatusCode.OK)
+                        ).andIn(
+                            () => response.Context.Response.ContentType.Should().Contain("json"));
+
+                    "have retrieved the current weekplan".asIn
+                        (
+                            () => Assert.True(true) //TDB  
+                        );
+                });
+        }
+
+        [Fact]
+        public void when_calling_weekplan_weeknumber()
+        {
+            var response = app.Get("/weekplan/30/", with => with.HttpRequest());
+
+            "the app".should
+                (() =>
+                {
+                    "return json".asIn
+                        (
+                            () => response.StatusCode.Should().Equal(HttpStatusCode.OK)
+                        ).andIn(
+                            () => response.Context.Response.ContentType.Should().Contain("json"));
+
+                    "have retrieved the weekplan for week 30".asIn
                         (
                             () => Assert.True(true) //TDB  
                         );
