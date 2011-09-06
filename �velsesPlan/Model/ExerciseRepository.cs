@@ -48,6 +48,8 @@ namespace ØvelsesPlan.Model
         public void UpdateByExerciseIdByPropertyNumber(string exerciseId, Exercise.PropertyNumbers columnNumber, string newValue)
         {
             var exerciseToUpdate = GetById(exerciseId);
+            if (exerciseToUpdate == null) 
+                return;
             exerciseToUpdate.UpdatePropertyNumber(columnNumber, newValue);
             Update(exerciseToUpdate);
         }

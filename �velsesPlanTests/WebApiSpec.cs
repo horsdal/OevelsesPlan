@@ -27,11 +27,11 @@ namespace ØvelsesPlanTests
 
             "the app".should
                 (() =>
-                        "return the index page".asIn
-                            (
-                                () => response.StatusCode.Should().Equal(HttpStatusCode.OK)
-                            ).andIn(
-                                () => response.Body["title"].ShouldContain("Øvelsesplan"))
+                 "return the index page".asIn
+                     (
+                         () => response.StatusCode.Should().Equal(HttpStatusCode.OK)
+                     ).andIn(
+                         () => response.Body["title"].ShouldContain("Øvelsesplan"))
                 );
         }
 
@@ -42,11 +42,11 @@ namespace ØvelsesPlanTests
 
             "the app".should
                 (() =>
-                    "return the exercises page".asIn
-                        (
-                            () => response.StatusCode.Should().Equal(HttpStatusCode.OK)
-                        ).andIn(
-                            () => response.Body["title"].ShouldContain("Øvelser"))
+                 "return the exercises page".asIn
+                     (
+                         () => response.StatusCode.Should().Equal(HttpStatusCode.OK)
+                     ).andIn(
+                         () => response.Body["title"].ShouldContain("Øvelser"))
                 );
         }
 
@@ -57,18 +57,18 @@ namespace ØvelsesPlanTests
 
             "the app".should
                 (() =>
-                {
-                    "return json".asIn
-                        (
-                            () => response.StatusCode.Should().Equal(HttpStatusCode.OK)
-                        ).andIn(
-                            () => response.Context.Response.ContentType.Should().Contain("json"));
+                     {
+                         "return json".asIn
+                             (
+                                 () => response.StatusCode.Should().Equal(HttpStatusCode.OK)
+                             ).andIn(
+                                 () => response.Context.Response.ContentType.Should().Contain("json"));
 
-                    "have retrieved all exercises".asIn
-                        (
-                            () => Assert.True(true) //TDB  
-                        );
-                });
+                         "have retrieved all exercises".asIn
+                             (
+                                 () => Assert.True(true) //TDB  
+                             );
+                     });
         }
 
         [Fact]
@@ -78,18 +78,18 @@ namespace ØvelsesPlanTests
 
             "the app".should
                 (() =>
-                {
-                    "return json".asIn
-                        (
-                            () => response.StatusCode.Should().Equal(HttpStatusCode.OK)
-                        ).andIn(
-                            () => response.Context.Response.ContentType.Should().Contain("json"));
+                     {
+                         "return json".asIn
+                             (
+                                 () => response.StatusCode.Should().Equal(HttpStatusCode.OK)
+                             ).andIn(
+                                 () => response.Context.Response.ContentType.Should().Contain("json"));
 
-                    "have retrieved the current weekplan".asIn
-                        (
-                            () => Assert.True(true) //TDB  
-                        );
-                });
+                         "have retrieved the current weekplan".asIn
+                             (
+                                 () => Assert.True(true) //TDB  
+                             );
+                     });
         }
 
         [Fact]
@@ -99,14 +99,120 @@ namespace ØvelsesPlanTests
 
             "the app".should
                 (() =>
+                     {
+                         "return json".asIn
+                             (
+                                 () => response.StatusCode.Should().Equal(HttpStatusCode.OK)
+                             ).andIn(
+                                 () => response.Context.Response.ContentType.Should().Contain("json"));
+
+                         "have retrieved the weekplan for week 30".asIn
+                             (
+                                 () => Assert.True(true) //TDB  
+                             );
+                     });
+        }
+
+        [Fact]
+        public void when_posting_to_exercises_create()
+        {
+            var response = app.Post("/exercises/create", with => with.HttpRequest());
+
+            "the app".should
+                (() =>
+                     {
+                         "return json.".asIn
+                             (
+                                 () => response.StatusCode.Should().Equal(HttpStatusCode.OK)
+                             ).andIn(
+                                 () => response.Context.Response.ContentType.Should().Contain("json"));
+
+                         "create a new exercise".asIn
+                             (
+                                 () => Assert.True(true) //TDB  
+                             );
+                     });
+        }
+
+        [Fact]
+        public void when_posting_to_exercises_delete()
+        {
+            var response = app.Post("/exercises/delete", with =>
+                                                             {
+                                                                 with.HttpRequest();
+                                                                 with.FormValue("row_id", "42");
+                                                             });
+
+            "the app".should
+                (() =>
+                     {
+                         "return ok.".asIn
+                             (
+                                 () => response.StatusCode.Should().Equal(HttpStatusCode.OK)
+                             );
+
+                         "delete exercise 42".asIn
+                             (
+                                 () => Assert.True(true) //TDB  
+                             );
+                     });
+        }
+
+        [Fact]
+        public void when_posting_to_exercises_edit()
+        {
+            var response = app.Post("/exercises/edit", with =>
+            {
+                with.HttpRequest();
+                with.FormValue("row_id", "42");
+                with.FormValue("column", "2");
+                with.FormValue("value", "ny værdi");
+            });
+
+            "the app".should
+                (() =>
+                     {
+                         "return the new value in a string.".asIn
+                             (
+                                 () => response.StatusCode.Should().Equal(HttpStatusCode.OK)
+                             ).andIn
+                             (
+                                 () => response.Context.Response.ContentType.Should().Contain("text/html")
+                             );
+
+                         "edit exercise 42".asIn
+                             (
+                                 () => Assert.True(true) //TDB  
+                             );
+                     });
+        }
+
+        [Fact]
+        public void when_posting_to_weekplan_create()
+        {
+            var response = app.Post("/weekplan/create", with =>
+            {
+                with.HttpRequest();
+                with.FormValue("weeknumber", "30");
+            });
+
+            "the app".should
+                (() =>
                 {
-                    "return json".asIn
+                    "return the new plan as json.".asIn
                         (
                             () => response.StatusCode.Should().Equal(HttpStatusCode.OK)
-                        ).andIn(
-                            () => response.Context.Response.ContentType.Should().Contain("json"));
+                        ).andIn
+                        (
+                            () => response.Context.Response.ContentType.Should().Contain("application/json")
+                        );
 
-                    "have retrieved the weekplan for week 30".asIn
+                    "return the weeknumber 30 within the json response".asIn
+                        (
+                            () => Assert.True(true) //TDB  
+                        );
+
+                    "create a new plan for week 30".asIn
                         (
                             () => Assert.True(true) //TDB  
                         );
