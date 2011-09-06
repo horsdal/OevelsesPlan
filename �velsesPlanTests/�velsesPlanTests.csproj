@@ -50,6 +50,9 @@
     <Reference Include="Nancy.Testing">
       <HintPath>..\packages\Nancy.Testing.0.7.1\lib\net40\Nancy.Testing.dll</HintPath>
     </Reference>
+    <Reference Include="Ploeh.AutoFixture">
+      <HintPath>..\packages\AutoFixture.2.1\lib\Ploeh.AutoFixture.dll</HintPath>
+    </Reference>
     <Reference Include="Ploeh.AutoFixture.Xunit, Version=2.0.0.2, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AutoFixture.Xunit.2.1\lib\Ploeh.AutoFixture.Xunit.dll</HintPath>
