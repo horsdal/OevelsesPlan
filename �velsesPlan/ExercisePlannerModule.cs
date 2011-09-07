@@ -10,7 +10,7 @@ namespace ØvelsesPlan
     {
         private readonly string connectionString;
         private readonly ExerciseRepository exercises;
-        private readonly MongoWeekPlanRepository weekPlans;
+        private readonly WeekPlanRepository weekPlans;
 
         public ExercisePlannerModule()
         {
