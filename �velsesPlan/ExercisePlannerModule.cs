@@ -8,16 +8,19 @@ namespace ØvelsesPlan
 {
     public class ExercisePlannerModule : NancyModule
     {
-        private readonly string connectionString;
-        private readonly ExerciseRepository exercises;
+        public readonly ExerciseRepository exercises;
         private readonly WeekPlanRepository weekPlans;
 
-        public ExercisePlannerModule()
+        public ExercisePlannerModule(ExerciseRepository exerciseRepository, WeekPlanRepository weekPlanRepository)
         {
-            connectionString = ConfigurationManager.AppSettings.Get("MONGOHQ_URL");
-
+#if false
+            var connectionString = ConfigurationManager.AppSettings.Get("MONGOHQ_URL");
             exercises = new MongoExerciseRepository(connectionString);
             weekPlans = new MongoWeekPlanRepository(connectionString, exercises);
+#else
+            exercises = exerciseRepository;
+            weekPlans = weekPlanRepository;
+#endif
 
             Get["/"] = _ => View["Index.htm"];
 

@@ -400,6 +400,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bootstrapper.cs" />
     <Compile Include="DataAccess\MongoExerciseRepository.cs" />
     <Compile Include="DataAccess\MongoWeekPlanRepository.cs" />
     <Compile Include="ExercisePlannerModule.cs" />

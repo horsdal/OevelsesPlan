@@ -15,7 +15,7 @@ namespace ØvelsesPlanTests
         public WebApiSpec()
         {
             ExercisePlannerModule artificialReference;
-            var bootstrapper = new DefaultNancyBootstrapper();
+            var bootstrapper = new Bootstrapper();
             bootstrapper.Initialise();
             app = new Browser(bootstrapper);
         }
