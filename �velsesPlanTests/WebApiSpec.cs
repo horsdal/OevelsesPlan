@@ -1,10 +1,11 @@
-﻿using System.IO;
-using Nancy;
+﻿using Nancy;
 using Nancy.Testing;
 using Should.Fluent;
 using Xunit;
 using Specs;
 using ØvelsesPlan;
+using ØvelsesPlan.DataAccess;
+using ØvelsesPlan.Model;
 
 namespace ØvelsesPlanTests
 {
@@ -18,6 +19,10 @@ namespace ØvelsesPlanTests
             var bootstrapper = new Bootstrapper();
             bootstrapper.Initialise();
             app = new Browser(bootstrapper);
+
+            var exercises = new MongoExerciseRepository(mongoConnectionString);
+            for (int i = 0; i < 10; i++)
+                exercises.Add(new Exercise(name: "Hop" + i, muscleGroup: "Lår", muscle: "Quadrozeps pemoris", active: true, description: "Foo"));
         }
 
         [Fact]
@@ -66,7 +71,14 @@ namespace ØvelsesPlanTests
 
                          "have retrieved all exercises".asIn
                              (
-                                 () => Assert.True(true) //TDB  
+                                 () =>
+                                     {
+                                         var jsonResponse = response.GetBodyAsString();
+                                         jsonResponse.Should().Contain("aaData");
+                                         var jsonArray = jsonResponse.Substring(jsonResponse.IndexOf("aaData"));
+                                         for (int i = 0; i < 10; i++)
+                                             jsonArray.Should().Contain("Hop" + i);
+                                     }
                              );
                      });
         }
@@ -129,7 +141,15 @@ namespace ØvelsesPlanTests
 
                          "create a new exercise".asIn
                              (
-                                 () => Assert.True(true) //TDB  
+                                 () =>
+                                     {
+                                         var jsonResponse = response.GetBodyAsString();
+                                         jsonResponse.Should().Contain("Name");
+                                         jsonResponse.Should().Contain("MuscleGroup");
+                                         jsonResponse.Should().Contain("Muscle");
+                                         jsonResponse.Should().Contain("Active");
+                                         jsonResponse.Should().Contain("Description");
+                                     }
                              );
                      });
         }

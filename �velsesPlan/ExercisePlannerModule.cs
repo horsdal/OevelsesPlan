@@ -13,14 +13,8 @@ namespace ØvelsesPlan
 
         public ExercisePlannerModule(ExerciseRepository exerciseRepository, WeekPlanRepository weekPlanRepository)
         {
-#if false
-            var connectionString = ConfigurationManager.AppSettings.Get("MONGOHQ_URL");
-            exercises = new MongoExerciseRepository(connectionString);
-            weekPlans = new MongoWeekPlanRepository(connectionString, exercises);
-#else
             exercises = exerciseRepository;
             weekPlans = weekPlanRepository;
-#endif
 
             Get["/"] = _ => View["Index.htm"];
 

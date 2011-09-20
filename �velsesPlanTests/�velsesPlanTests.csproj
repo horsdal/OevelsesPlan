@@ -77,6 +77,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BrowserResponseExtensions.cs" />
     <Compile Include="ExerciseSpec.cs" />
     <Compile Include="MongoIntegrationSpec.cs" />
     <Compile Include="WebApiSpec.cs" />
